@@ -1,0 +1,8 @@
+Illustrative e-commerce checkout project notes. These statements are sample input and do not assert legal or regulatory obligations.
+
+The storefront shall show the current product price, available quantity, and delivery estimate before a customer places an order.
+The checkout shall send payment details directly to the configured payment provider and shall not retain raw card credentials.
+The order service shall assign a unique order reference after the payment provider confirms the transaction.
+If payment confirmation is delayed, the storefront shall show a pending state and prevent duplicate order submission while status is checked.
+Customers shall be able to view order status and request cancellation before the order enters fulfilment.
+The operations team shall be able to review an audit history of order status changes and manual refunds.

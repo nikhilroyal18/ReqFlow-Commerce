@@ -1,0 +1,92 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ReqFlow Commerce</title>
+    <link rel="stylesheet" href="/static/styles.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">R</span><span>ReqFlow Commerce</span></div>
+      <p>Evidence-led requirements for digital commerce teams</p>
+      <select id="projectPicker" aria-label="Select saved project"><option value="">Saved projects</option></select>
+      <button id="deleteProjectButton" class="danger-button" type="button" disabled>Delete project</button>
+      <button id="logoutButton" class="quiet-button is-hidden" type="button">Sign out</button>
+      <a id="exportLink" class="icon-action is-hidden" title="Export project JSON" download>Export JSON</a>
+    </header>
+    <main>
+      <section id="loginPanel" class="panel is-hidden" aria-labelledby="login-title"><p class="eyebrow">Workspace access</p><h2 id="login-title">Sign in to ReqFlow</h2><p id="loginNotice" class="muted">Use your assigned workspace account.</p><form id="loginForm" class="login-form"><label>Username<input id="loginUsername" autocomplete="username" required></label><label>Password<input id="loginPassword" type="password" autocomplete="current-password" required></label><button type="submit">Sign in</button></form></section>
+      <section class="workspace" aria-labelledby="workspace-title">
+        <div class="section-heading">
+          <div><p class="eyebrow">Project workspace</p><h1 id="workspace-title">From product brief to an approved plan</h1></div>
+          <span id="projectState" class="state">No project loaded</span>
+        </div>
+        <div class="metric-grid" aria-label="Active project metrics"><article><span>Requirements</span><strong id="metricRequirements">—</strong></article><article><span>Needs clarification</span><strong id="metricClarifications">—</strong></article><article><span>Pending approval</span><strong id="metricApprovals">—</strong></article><article><span>High risks</span><strong id="metricRisks">—</strong></article></div>        <div class="agent-summary" aria-label="Agent workflow"><span><strong>Requirements</strong> Extracts, classifies, and checks evidence-grounded requirements.</span><span><strong>Compliance &amp; risk</strong> Suggests e-commerce security and privacy controls and traceability.</span><span><strong>Governance &amp; SDLC</strong> Assesses controls and ranks delivery models.</span></div>
+        <form id="interviewStartForm" class="intake">
+          <div class="interview-heading"><p class="eyebrow">Adaptive stakeholder interview</p><p>Begin with the essentials. The interview agent selects each next question from the e-commerce workflow you describe.</p></div>
+          <div class="starter-grid">
+            <label>Project or workflow<input id="functionality" placeholder="e.g. Marketplace checkout and order tracking" required minlength="3"></label>
+            <label>Business objective<textarea id="businessObjective" placeholder="What problem should this solve, and why does it matter?" required></textarea></label>
+            <label>Users and roles<textarea id="usersRoles" placeholder="Who uses it, and what must each role be able to do?" required></textarea></label>
+          </div>
+          <label class="upload-label">Supporting documents (optional)<input id="files" type="file" accept=".txt,.md,.csv,.pdf,.docx" multiple></label>
+          <button type="submit">Start interview</button>
+        </form>
+        <section id="interviewSession" class="interview-session is-hidden" aria-live="polite">
+          <div class="interview-meta"><span id="questionProgress" class="state"></span><span id="answerCount" class="muted"></span></div>
+          <p id="questionTopic" class="eyebrow"></p>
+          <h2 id="interviewQuestion"></h2>
+          <textarea id="interviewAnswer" placeholder="Write the information you know. Specific rules, limits, conditions, and outcomes are especially useful."></textarea>
+          <div class="interview-actions"><button id="continueInterview" type="button">Save and continue</button><button id="skipInterviewQuestion" class="quiet-button" type="button">Skip for now</button></div>
+        </section>
+        <section id="interviewComplete" class="interview-complete is-hidden">
+          <p class="eyebrow">Interview ready</p><h2>Turn the conversation into evidence-grounded requirements</h2>
+          <p id="interviewSummary" class="muted"></p>
+          <button id="createProject" type="button">Create project</button>
+        </section>
+        <p class="quiet">Responses and optional documents are masked for common account, identity, and tax-ID patterns before local processing. Drafts are advisory and need human approval.</p>
+      </section>
+
+      <nav class="workspace-nav" aria-label="Workspace sections"><a href="#interviewStartForm">Project intake</a><a href="#documentsPanel">Evidence library</a><a href="#requirementsPanel">Requirements</a><a href="#qualityPanel">Risk &amp; quality</a><a href="#sdlcPanel">SDLC planner</a></nav>
+      <nav class="steps" aria-label="Requirements pipeline stages">
+        <span class="active">1 Sources</span><span>2 Requirements</span><span>3 Risk &amp; controls</span><span>4 Governance &amp; SDLC</span>
+      </nav>
+
+      <section id="documentsPanel" class="panel is-hidden" aria-labelledby="documents-title">
+        <div class="panel-title"><div><p class="eyebrow">Evidence library</p><h2 id="documents-title">Indexed source documents</h2></div><button id="generateButton" type="button">Generate requirements</button></div>
+        <div id="ragSummary" class="rag-summary" aria-label="RAG index status"></div>
+        <div id="documentList" class="document-list"></div>
+        <div class="retrieval-toolbar"><label>Search indexed evidence<input id="retrievalQuery" placeholder="Search catalogues, checkout, orders, inventory, returns…"></label><button id="retrieveButton" type="button">Retrieve</button><span id="retrievalCount" class="count"></span></div>
+        <div id="retrievalResults" class="retrieval-results"></div>
+      </section>
+
+      <section id="requirementsPanel" class="panel is-hidden" aria-labelledby="requirements-title">
+        <div class="panel-title"><div><p class="eyebrow">Requirement studio · Human review required</p><h2 id="requirements-title">Generated requirements</h2></div><span id="requirementCount" class="count"></span></div>
+        <div class="export-actions"><a id="srsExport" class="quiet-link is-hidden" download>Download SRS (Markdown)</a><a id="csvExport" class="quiet-link is-hidden" download>Download requirements (CSV)</a></div>
+        <div id="requirementsList" class="requirements-list"></div>
+      </section>
+
+      <section id="qualityPanel" class="panel is-hidden" aria-labelledby="quality-title">
+        <div class="panel-title"><div><p class="eyebrow">Quality analysis</p><h2 id="quality-title">Review queue</h2></div><span id="issueCount" class="count"></span></div>
+        <div id="issuesList" class="issues-list"></div>
+      </section>
+
+      <section id="sdlcPanel" class="panel is-hidden" aria-labelledby="sdlc-title">
+        <div class="panel-title"><div><p class="eyebrow">Agent 2 Â· Governance advisory</p><h2 id="sdlc-title">SDLC analysis</h2></div><button id="sdlcButton" type="button">Run SDLC recommendation</button></div>
+        <div id="sdlcResult"></div>
+      </section>
+    </main>
+    <dialog id="editRequirementDialog"><form id="editRequirementForm"><div class="dialog-heading"><p class="eyebrow">Human requirement review</p><h2>Edit requirement</h2></div><label>Requirement statement<textarea id="editStatement" required minlength="12"></textarea></label><label>Business justification<textarea id="editJustification" required minlength="4"></textarea></label><label>Acceptance criteria (one per line)<textarea id="editAcceptance"></textarea></label><div class="dialog-row"><label>Priority<select id="editPriority"><option>Must</option><option>Should</option><option>Could</option></select></label><label>Risk<select id="editRisk"><option>Low</option><option>Medium</option><option>High</option></select></label></div><div class="dialog-actions"><button type="button" id="cancelRequirementEdit" class="quiet-button">Cancel</button><button type="submit">Save changes</button></div></form></dialog>
+    <div id="toast" role="status" aria-live="polite"></div>
+    <script src="/static/app.js?v=commerce-interview-v1"></script>
+    <script src="/static/workspace.js?v=workspace-crud-v1"></script>
+  </body>
+</html>
+
+
+
+
+
+
+

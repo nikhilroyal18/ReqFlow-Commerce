@@ -1,0 +1,3181 @@
+{
+  "id": "810bf8e69581",
+  "functionality": "E-commerce Shopping and Order Management System",
+  "created_at": "2026-10-30T16:07:51.596326Z",
+  "owner_user": "local-admin",
+  "documents": [
+    {
+      "id": "DOC-001",
+      "name": "Stakeholder interview",
+      "chunks": [
+        {
+          "id": "chunk-001",
+          "text": "business objective: To develop an online shopping platform where customers can browse products, add items to their cart, make secure payments and track their orders. users and roles: Customers can browse and purchase products. Administrators can manage products, inventory and orders. Delivery personnel can update delivery status. workflow and outcomes: The application allows customers to browse products, search for items, add products to their shopping cart, and place orders. Customers can make online payments and track their orders. Administrators can manage products, update inventory, view customer orders, and handle cancellations."
+        },
+        {
+          "id": "chunk-002",
+          "text": "The expected outcome is a smooth, secure, and user-friendly online shopping experience with efficient order management. business rules: Customers must register or log in before placing an order. Products can be added to the cart only if they are in stock. Orders should be confirmed only after successful payment. If payment fails, the order should not be placed. Customers can cancel orders before they are shipped, and administrators can update product prices and stock availability. exceptions: If a product becomes out of stock while a customer is placing an order, the system should notify the customer and prevent the purchase."
+        },
+        {
+          "id": "chunk-003",
+          "text": "If payment fails or gets interrupted, the customer should be allowed to retry the payment. If an order is already shipped, cancellation may not be allowed. Administrators can override product availability and order status when necessary. data and integrations: The application stores customer details, product information, product prices, inventory, shopping cart items, orders, and payment details. It integrates with a payment gateway to process online transactions and a delivery service to track shipments. Customer and order information should be stored securely and updated whenever a purchase or order status changes."
+        },
+        {
+          "id": "chunk-004",
+          "text": "security and compliance: The application should protect customer information such as personal details, passwords, and payment data. User authentication and role-based access should be provided to prevent unauthorised access. Payment transactions must be processed securely, and customer data should be protected during storage and transmission. The system should also provide secure order and transaction records. service levels and scale: The e-commerce application should support multiple customers browsing and purchasing products simultaneously. It should handle increasing numbers of products, orders, and users without affecting performance."
+        },
+        {
+          "id": "chunk-005",
+          "text": "The system should remain available during peak shopping periods and process orders and payments efficiently. delivery constraints: The application will initially be developed as a web-based e-commerce platform accessible through desktop and mobile browsers. It should provide a simple and user-friendly interface for customers, administrators, and delivery personnel. The system will be developed in multiple stages, starting with product browsing, cart management, payment processing, and order tracking, followed by additional features based on user feedback."
+        },
+        {
+          "id": "chunk-006",
+          "text": "validation and rollout: The application will be tested to ensure that product browsing, cart management, payment processing, and order tracking work correctly. Functional testing, usability testing, and security testing will be performed to identify errors. Initially, the application will be tested with a small group of users, and feedback will be collected to improve the system before its final deployment."
+        }
+      ]
+    },
+    {
+      "id": "DOC-002",
+      "name": "Clarification DOC-002",
+      "chunks": [
+        {
+          "id": "chunk-001",
+          "text": "Clarification response for REQ-001: REQ-001: Has the security, privacy, and compliance applicability for this requirement been confirmed? Answer: \"Yes. The requirement involves customer information, orders, and payments. Authentication, secure payment processing, and protection of customer data are applicable.\""
+        }
+      ]
+    },
+    {
+      "id": "DOC-003",
+      "name": "Clarification DOC-003",
+      "chunks": [
+        {
+          "id": "chunk-001",
+          "text": "Clarification response for REQ-001: REQ-001: Has the security, privacy, and compliance applicability for this requirement been confirmed? Answer: \"Yes. The requirement involves customer information, orders, and payments. Authentication, secure payment processing, and protection of customer data are applicable.\""
+        }
+      ]
+    },
+    {
+      "id": "DOC-004",
+      "name": "Clarification DOC-004",
+      "chunks": [
+        {
+          "id": "chunk-001",
+          "text": "Clarification response for REQ-003: REQ-003: What measurable threshold or observable outcome should replace the qualitative wording? Answer: \"Customers should be able to browse products and add items to their cart within three navigation steps. Administrators should be able to manage products, and delivery personnel should be able to update delivery status.\""
+        }
+      ]
+    },
+    {
+      "id": "DOC-005",
+      "name": "Clarification DOC-005",
+      "chunks": [
+        {
+          "id": "chunk-001",
+          "text": "Clarification response for REQ-004: REQ-004: What pass/fail acceptance test, test data, and expected result will verify this requirement? Answer: \"The system should allow customers to browse products, add products to their cart, complete payments, and track orders. Testing should verify that each operation completes successfully.\""
+        }
+      ]
+    },
+    {
+      "id": "DOC-006",
+      "name": "Clarification DOC-006",
+      "chunks": [
+        {
+          "id": "chunk-001",
+          "text": "Clarification response for REQ-005: REQ-005: What pass/fail acceptance test, test data, and expected result will verify this requirement? Answer: \"Verify that customer information is protected, passwords are securely stored, and payment transactions are processed through a secure payment mechanism.\""
+        }
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "statement": "The system shall maintain at least 99% availability during normal operating hours and support 500 concurrent users while processing orders and payments without significant performance degradation.",
+      "categories": [
+        "Functional"
+      ],
+      "evidence": [
+        {
+          "document_id": "DOC-001",
+          "document_name": "Stakeholder interview",
+          "chunk_id": "chunk-005",
+          "excerpt": "The system should remain available during peak shopping periods and process orders and payments efficiently.",
+          "relevance": 0.71,
+          "source_url": null,
+          "source_version": null,
+          "effective_date": null
+        }
+      ],
+      "business_justification": "Ensures customers can browse products, place orders, and complete payments reliably, even during periods of high traffic.",
+      "priority": "Should",
+      "dependencies": [],
+      "assumptions": [],
+      "acceptance_criteria": [
+        "The application shall maintain at least 99% availability during the defined measurement period.",
+        "The application shall support 500 concurrent users during load testing.",
+        "95% of order and payment requests shall complete within 3 seconds under the specified test load."
+      ],
+      "applicable_policy": "ECOM-PAYMENT; ECOM-ORDER-AUDIT",
+      "compliance_mappings": [
+        {
+          "control_id": "ECOM-PAYMENT",
+          "source_title": "Payment and checkout security review (advisory practice; not a regulation)",
+          "source_url": "",
+          "jurisdiction": "Project-defined",
+          "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+          "rationale": "Review payment-provider boundaries, checkout integrity, sensitive-data handling, and failure recovery.",
+          "human_approval_required": true
+        },
+        {
+          "control_id": "ECOM-ORDER-AUDIT",
+          "source_title": "Order and administrative auditability (advisory practice; not a regulation)",
+          "source_url": "",
+          "jurisdiction": "Project-defined",
+          "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+          "rationale": "Define traceable order-state changes, privileged actions, and operational evidence.",
+          "human_approval_required": true
+        }
+      ],
+      "risk_level": "Medium",
+      "confidence": 0.71,
+      "reasoning": "Evidence-only draft derived verbatim from the cited source; human refinement is required.",
+      "approval_status": "Needs review"
+    },
+    {
+      "id": "REQ-002",
+      "statement": "The e-commerce application shall be accessible through desktop and mobile browsers, with all major shopping functions working correctly on both platforms.",
+      "categories": [
+        "Security"
+      ],
+      "evidence": [
+        {
+          "document_id": "DOC-001",
+          "document_name": "Stakeholder interview",
+          "chunk_id": "chunk-005",
+          "excerpt": "delivery constraints: The application will initially be developed as a web-based e-commerce platform accessible through desktop and mobile browsers.",
+          "relevance": 0.71,
+          "source_url": null,
+          "source_version": null,
+          "effective_date": null
+        }
+      ],
+      "business_justification": "Ensures customers can access the shopping platform conveniently from different devices.",
+      "priority": "Should",
+      "dependencies": [],
+      "assumptions": [],
+      "acceptance_criteria": [
+        "The application shall support the latest two major versions of Chrome, Firefox, and Edge.",
+        "The application shall display correctly on desktop, tablet, and mobile screen sizes.",
+        "Customers shall be able to browse products, add items to the cart, and place orders on both desktop and mobile browsers."
+      ],
+      "applicable_policy": null,
+      "compliance_mappings": [],
+      "risk_level": "Medium",
+      "confidence": 0.71,
+      "reasoning": "Evidence-only draft derived verbatim from the cited source; human refinement is required.",
+      "approval_status": "Needs review"
+    },
+    {
+      "id": "REQ-003",
+      "statement": "The system shall provide a simple and user-friendly interface that allows customers, administrators, and delivery personnel to perform their respective tasks easily.",
+      "categories": [
+        "Integration"
+      ],
+      "evidence": [
+        {
+          "document_id": "DOC-001",
+          "document_name": "Stakeholder interview",
+          "chunk_id": "chunk-005",
+          "excerpt": "It should provide a simple and user-friendly interface for customers, administrators, and delivery personnel.",
+          "relevance": 0.71,
+          "source_url": null,
+          "source_version": null,
+          "effective_date": null
+        }
+      ],
+      "business_justification": "Ensures that all users can interact with the application easily without requiring technical knowledge.",
+      "priority": "Should",
+      "dependencies": [],
+      "assumptions": [],
+      "acceptance_criteria": [
+        "Customers shall be able to find products and add them to their cart within three navigation steps.",
+        "Administrators shall be able to add, update, and remove product information.",
+        "Delivery personnel shall be able to view assigned orders and update delivery status.",
+        "The interface shall display clear error messages when users enter invalid information."
+      ],
+      "applicable_policy": "ECOM-API-RESILIENCE",
+      "compliance_mappings": [
+        {
+          "control_id": "ECOM-API-RESILIENCE",
+          "source_title": "Marketplace and integration resilience (advisory practice; not a regulation)",
+          "source_url": "",
+          "jurisdiction": "Project-defined",
+          "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+          "rationale": "Review interface ownership, validation, retries, idempotency, and failure handling.",
+          "human_approval_required": true
+        }
+      ],
+      "risk_level": "Medium",
+      "confidence": 0.71,
+      "reasoning": "Evidence-only draft derived verbatim from the cited source; human refinement is required.",
+      "approval_status": "Needs review"
+    },
+    {
+      "id": "REQ-004",
+      "statement": "The system will be developed in multiple stages, starting with product browsing, cart management, payment processing, and order tracking, followed by additional features based on user feedback.",
+      "categories": [
+        "Functional"
+      ],
+      "evidence": [
+        {
+          "document_id": "DOC-001",
+          "document_name": "Stakeholder interview",
+          "chunk_id": "chunk-005",
+          "excerpt": "The system will be developed in multiple stages, starting with product browsing, cart management, payment processing, and order tracking, followed by additional features based on user feedback.",
+          "relevance": 0.71,
+          "source_url": null,
+          "source_version": null,
+          "effective_date": null
+        }
+      ],
+      "business_justification": "Supports the documented E-commerce Shopping and Order Management System need.",
+      "priority": "Should",
+      "dependencies": [],
+      "assumptions": [],
+      "acceptance_criteria": [
+        "A reviewer must confirm measurable acceptance criteria before baseline approval."
+      ],
+      "applicable_policy": "ECOM-PAYMENT; ECOM-ORDER-AUDIT",
+      "compliance_mappings": [
+        {
+          "control_id": "ECOM-PAYMENT",
+          "source_title": "Payment and checkout security review (advisory practice; not a regulation)",
+          "source_url": "",
+          "jurisdiction": "Project-defined",
+          "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+          "rationale": "Review payment-provider boundaries, checkout integrity, sensitive-data handling, and failure recovery.",
+          "human_approval_required": true
+        },
+        {
+          "control_id": "ECOM-ORDER-AUDIT",
+          "source_title": "Order and administrative auditability (advisory practice; not a regulation)",
+          "source_url": "",
+          "jurisdiction": "Project-defined",
+          "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+          "rationale": "Define traceable order-state changes, privileged actions, and operational evidence.",
+          "human_approval_required": true
+        }
+      ],
+      "risk_level": "Medium",
+      "confidence": 0.71,
+      "reasoning": "Evidence-only draft derived verbatim from the cited source; human refinement is required.",
+      "approval_status": "Needs review"
+    },
+    {
+      "id": "REQ-005",
+      "statement": "security and compliance: The application should protect customer information such as personal details, passwords, and payment data.",
+      "categories": [
+        "Security",
+        "Regulatory",
+        "Data management"
+      ],
+      "evidence": [
+        {
+          "document_id": "DOC-001",
+          "document_name": "Stakeholder interview",
+          "chunk_id": "chunk-004",
+          "excerpt": "security and compliance: The application should protect customer information such as personal details, passwords, and payment data.",
+          "relevance": 0.69,
+          "source_url": null,
+          "source_version": null,
+          "effective_date": null
+        }
+      ],
+      "business_justification": "Supports the documented E-commerce Shopping and Order Management System need.",
+      "priority": "Should",
+      "dependencies": [],
+      "assumptions": [],
+      "acceptance_criteria": [
+        "A reviewer must confirm measurable acceptance criteria before baseline approval."
+      ],
+      "applicable_policy": "ECOM-PAYMENT",
+      "compliance_mappings": [
+        {
+          "control_id": "ECOM-PAYMENT",
+          "source_title": "Payment and checkout security review (advisory practice; not a regulation)",
+          "source_url": "",
+          "jurisdiction": "Project-defined",
+          "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+          "rationale": "Review payment-provider boundaries, checkout integrity, sensitive-data handling, and failure recovery.",
+          "human_approval_required": true
+        }
+      ],
+      "risk_level": "Medium",
+      "confidence": 0.69,
+      "reasoning": "Evidence-only draft derived verbatim from the cited source; human refinement is required.",
+      "approval_status": "Needs review"
+    },
+    {
+      "id": "REQ-006",
+      "statement": "User authentication and role-based access should be provided to prevent unauthorised access.",
+      "categories": [
+        "Security"
+      ],
+      "evidence": [
+        {
+          "document_id": "DOC-001",
+          "document_name": "Stakeholder interview",
+          "chunk_id": "chunk-004",
+          "excerpt": "User authentication and role-based access should be provided to prevent unauthorised access.",
+          "relevance": 0.69,
+          "source_url": null,
+          "source_version": null,
+          "effective_date": null
+        }
+      ],
+      "business_justification": "Supports the documented E-commerce Shopping and Order Management System need.",
+      "priority": "Should",
+      "dependencies": [],
+      "assumptions": [],
+      "acceptance_criteria": [
+        "A reviewer must confirm measurable acceptance criteria before baseline approval."
+      ],
+      "applicable_policy": "ECOM-IDENTITY",
+      "compliance_mappings": [
+        {
+          "control_id": "ECOM-IDENTITY",
+          "source_title": "Customer and staff identity controls (advisory practice; not a regulation)",
+          "source_url": "",
+          "jurisdiction": "Project-defined",
+          "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+          "rationale": "Review authentication, account recovery, session handling, and staff access boundaries.",
+          "human_approval_required": true
+        }
+      ],
+      "risk_level": "Medium",
+      "confidence": 0.69,
+      "reasoning": "Evidence-only draft derived verbatim from the cited source; human refinement is required.",
+      "approval_status": "Needs review"
+    },
+    {
+      "id": "REQ-007",
+      "statement": "Payment transactions must be processed securely, and customer data should be protected during storage and transmission.",
+      "categories": [
+        "Data management"
+      ],
+      "evidence": [
+        {
+          "document_id": "DOC-001",
+          "document_name": "Stakeholder interview",
+          "chunk_id": "chunk-004",
+          "excerpt": "Payment transactions must be processed securely, and customer data should be protected during storage and transmission.",
+          "relevance": 0.69,
+          "source_url": null,
+          "source_version": null,
+          "effective_date": null
+        }
+      ],
+      "business_justification": "Supports the documented E-commerce Shopping and Order Management System need.",
+      "priority": "Should",
+      "dependencies": [],
+      "assumptions": [],
+      "acceptance_criteria": [
+        "A reviewer must confirm measurable acceptance criteria before baseline approval."
+      ],
+      "applicable_policy": "ECOM-PAYMENT; ECOM-PRIVACY",
+      "compliance_mappings": [
+        {
+          "control_id": "ECOM-PAYMENT",
+          "source_title": "Payment and checkout security review (advisory practice; not a regulation)",
+          "source_url": "",
+          "jurisdiction": "Project-defined",
+          "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+          "rationale": "Review payment-provider boundaries, checkout integrity, sensitive-data handling, and failure recovery.",
+          "human_approval_required": true
+        },
+        {
+          "control_id": "ECOM-PRIVACY",
+          "source_title": "Customer data privacy review (advisory practice; not a regulation)",
+          "source_url": "",
+          "jurisdiction": "Project-defined",
+          "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+          "rationale": "Confirm data purpose, minimisation, access, retention, and deletion against an approved project policy.",
+          "human_approval_required": true
+        }
+      ],
+      "risk_level": "Medium",
+      "confidence": 0.69,
+      "reasoning": "Evidence-only draft derived verbatim from the cited source; human refinement is required.",
+      "approval_status": "Needs review"
+    },
+    {
+      "id": "REQ-008",
+      "statement": "The system should also provide secure order and transaction records.",
+      "categories": [
+        "Data management"
+      ],
+      "evidence": [
+        {
+          "document_id": "DOC-001",
+          "document_name": "Stakeholder interview",
+          "chunk_id": "chunk-004",
+          "excerpt": "The system should also provide secure order and transaction records.",
+          "relevance": 0.69,
+          "source_url": null,
+          "source_version": null,
+          "effective_date": null
+        }
+      ],
+      "business_justification": "Supports the documented E-commerce Shopping and Order Management System need.",
+      "priority": "Should",
+      "dependencies": [],
+      "assumptions": [],
+      "acceptance_criteria": [
+        "A reviewer must confirm measurable acceptance criteria before baseline approval."
+      ],
+      "applicable_policy": "ECOM-PAYMENT; ECOM-ORDER-AUDIT",
+      "compliance_mappings": [
+        {
+          "control_id": "ECOM-PAYMENT",
+          "source_title": "Payment and checkout security review (advisory practice; not a regulation)",
+          "source_url": "",
+          "jurisdiction": "Project-defined",
+          "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+          "rationale": "Review payment-provider boundaries, checkout integrity, sensitive-data handling, and failure recovery.",
+          "human_approval_required": true
+        },
+        {
+          "control_id": "ECOM-ORDER-AUDIT",
+          "source_title": "Order and administrative auditability (advisory practice; not a regulation)",
+          "source_url": "",
+          "jurisdiction": "Project-defined",
+          "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+          "rationale": "Define traceable order-state changes, privileged actions, and operational evidence.",
+          "human_approval_required": true
+        }
+      ],
+      "risk_level": "Medium",
+      "confidence": 0.69,
+      "reasoning": "Evidence-only draft derived verbatim from the cited source; human refinement is required.",
+      "approval_status": "Needs review"
+    },
+    {
+      "id": "REQ-009",
+      "statement": "service levels and scale: The e-commerce application should support multiple customers browsing and purchasing products simultaneously.",
+      "categories": [
+        "Functional"
+      ],
+      "evidence": [
+        {
+          "document_id": "DOC-001",
+          "document_name": "Stakeholder interview",
+          "chunk_id": "chunk-004",
+          "excerpt": "service levels and scale: The e-commerce application should support multiple customers browsing and purchasing products simultaneously.",
+          "relevance": 0.69,
+          "source_url": null,
+          "source_version": null,
+          "effective_date": null
+        }
+      ],
+      "business_justification": "Supports the documented E-commerce Shopping and Order Management System need.",
+      "priority": "Should",
+      "dependencies": [],
+      "assumptions": [],
+      "acceptance_criteria": [
+        "A reviewer must confirm measurable acceptance criteria before baseline approval."
+      ],
+      "applicable_policy": null,
+      "compliance_mappings": [],
+      "risk_level": "Medium",
+      "confidence": 0.69,
+      "reasoning": "Evidence-only draft derived verbatim from the cited source; human refinement is required.",
+      "approval_status": "Needs review"
+    },
+    {
+      "id": "REQ-010",
+      "statement": "It should handle increasing numbers of products, orders, and users without affecting performance.",
+      "categories": [
+        "Performance"
+      ],
+      "evidence": [
+        {
+          "document_id": "DOC-001",
+          "document_name": "Stakeholder interview",
+          "chunk_id": "chunk-004",
+          "excerpt": "It should handle increasing numbers of products, orders, and users without affecting performance.",
+          "relevance": 0.69,
+          "source_url": null,
+          "source_version": null,
+          "effective_date": null
+        }
+      ],
+      "business_justification": "Supports the documented E-commerce Shopping and Order Management System need.",
+      "priority": "Should",
+      "dependencies": [],
+      "assumptions": [],
+      "acceptance_criteria": [
+        "A reviewer must confirm measurable acceptance criteria before baseline approval."
+      ],
+      "applicable_policy": "ECOM-ORDER-AUDIT",
+      "compliance_mappings": [
+        {
+          "control_id": "ECOM-ORDER-AUDIT",
+          "source_title": "Order and administrative auditability (advisory practice; not a regulation)",
+          "source_url": "",
+          "jurisdiction": "Project-defined",
+          "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+          "rationale": "Define traceable order-state changes, privileged actions, and operational evidence.",
+          "human_approval_required": true
+        }
+      ],
+      "risk_level": "Medium",
+      "confidence": 0.69,
+      "reasoning": "Evidence-only draft derived verbatim from the cited source; human refinement is required.",
+      "approval_status": "Needs review"
+    }
+  ],
+  "quality_issues": [
+    {
+      "id": "QI-001",
+      "requirement_id": "REQ-001",
+      "check": "Missing security or compliance requirements",
+      "severity": "Low",
+      "message": "This item has no linked security, privacy, or regulatory control.",
+      "recommendation": "Confirm whether a control is not applicable or add an evidence-backed control."
+    },
+    {
+      "id": "QI-002",
+      "requirement_id": "REQ-003",
+      "check": "Ambiguity",
+      "severity": "Medium",
+      "message": "The requirement contains a qualitative term without a measurable threshold.",
+      "recommendation": "Define an observable metric, limit, or acceptance test."
+    },
+    {
+      "id": "QI-003",
+      "requirement_id": "REQ-003",
+      "check": "Missing security or compliance requirements",
+      "severity": "Low",
+      "message": "This item has no linked security, privacy, or regulatory control.",
+      "recommendation": "Confirm whether a control is not applicable or add an evidence-backed control."
+    },
+    {
+      "id": "QI-004",
+      "requirement_id": "REQ-004",
+      "check": "Lack of testability",
+      "severity": "Medium",
+      "message": "Acceptance criteria are absent or not yet measurable.",
+      "recommendation": "Add pass/fail criteria, test data, and expected outcome."
+    },
+    {
+      "id": "QI-005",
+      "requirement_id": "REQ-004",
+      "check": "Missing security or compliance requirements",
+      "severity": "Low",
+      "message": "This item has no linked security, privacy, or regulatory control.",
+      "recommendation": "Confirm whether a control is not applicable or add an evidence-backed control."
+    },
+    {
+      "id": "QI-006",
+      "requirement_id": "REQ-005",
+      "check": "Lack of testability",
+      "severity": "Medium",
+      "message": "Acceptance criteria are absent or not yet measurable.",
+      "recommendation": "Add pass/fail criteria, test data, and expected outcome."
+    },
+    {
+      "id": "QI-007",
+      "requirement_id": "REQ-006",
+      "check": "Lack of testability",
+      "severity": "Medium",
+      "message": "Acceptance criteria are absent or not yet measurable.",
+      "recommendation": "Add pass/fail criteria, test data, and expected outcome."
+    },
+    {
+      "id": "QI-008",
+      "requirement_id": "REQ-007",
+      "check": "Ambiguity",
+      "severity": "Medium",
+      "message": "The requirement contains a qualitative term without a measurable threshold.",
+      "recommendation": "Define an observable metric, limit, or acceptance test."
+    },
+    {
+      "id": "QI-009",
+      "requirement_id": "REQ-007",
+      "check": "Lack of testability",
+      "severity": "Medium",
+      "message": "Acceptance criteria are absent or not yet measurable.",
+      "recommendation": "Add pass/fail criteria, test data, and expected outcome."
+    },
+    {
+      "id": "QI-010",
+      "requirement_id": "REQ-007",
+      "check": "Missing security or compliance requirements",
+      "severity": "Low",
+      "message": "This item has no linked security, privacy, or regulatory control.",
+      "recommendation": "Confirm whether a control is not applicable or add an evidence-backed control."
+    },
+    {
+      "id": "QI-011",
+      "requirement_id": "REQ-008",
+      "check": "Ambiguity",
+      "severity": "Medium",
+      "message": "The requirement contains a qualitative term without a measurable threshold.",
+      "recommendation": "Define an observable metric, limit, or acceptance test."
+    },
+    {
+      "id": "QI-012",
+      "requirement_id": "REQ-008",
+      "check": "Lack of testability",
+      "severity": "Medium",
+      "message": "Acceptance criteria are absent or not yet measurable.",
+      "recommendation": "Add pass/fail criteria, test data, and expected outcome."
+    },
+    {
+      "id": "QI-013",
+      "requirement_id": "REQ-008",
+      "check": "Missing security or compliance requirements",
+      "severity": "Low",
+      "message": "This item has no linked security, privacy, or regulatory control.",
+      "recommendation": "Confirm whether a control is not applicable or add an evidence-backed control."
+    },
+    {
+      "id": "QI-014",
+      "requirement_id": "REQ-009",
+      "check": "Lack of testability",
+      "severity": "Medium",
+      "message": "Acceptance criteria are absent or not yet measurable.",
+      "recommendation": "Add pass/fail criteria, test data, and expected outcome."
+    },
+    {
+      "id": "QI-015",
+      "requirement_id": "REQ-009",
+      "check": "Missing security or compliance requirements",
+      "severity": "Low",
+      "message": "This item has no linked security, privacy, or regulatory control.",
+      "recommendation": "Confirm whether a control is not applicable or add an evidence-backed control."
+    },
+    {
+      "id": "QI-016",
+      "requirement_id": "REQ-010",
+      "check": "Lack of testability",
+      "severity": "Medium",
+      "message": "Acceptance criteria are absent or not yet measurable.",
+      "recommendation": "Add pass/fail criteria, test data, and expected outcome."
+    },
+    {
+      "id": "QI-017",
+      "requirement_id": "REQ-010",
+      "check": "Missing security or compliance requirements",
+      "severity": "Low",
+      "message": "This item has no linked security, privacy, or regulatory control.",
+      "recommendation": "Confirm whether a control is not applicable or add an evidence-backed control."
+    },
+    {
+      "id": "QI-018",
+      "requirement_id": "REQ-001",
+      "check": "Potential conflict",
+      "severity": "High",
+      "message": "Potentially opposing statements detected with REQ-002.",
+      "recommendation": "Ask the accountable stakeholders to resolve the conflict and record the decision."
+    },
+    {
+      "id": "QI-019",
+      "requirement_id": "REQ-001",
+      "check": "Potential conflict",
+      "severity": "High",
+      "message": "Potentially opposing statements detected with REQ-003.",
+      "recommendation": "Ask the accountable stakeholders to resolve the conflict and record the decision."
+    },
+    {
+      "id": "QI-020",
+      "requirement_id": "REQ-001",
+      "check": "Potential conflict",
+      "severity": "High",
+      "message": "Potentially opposing statements detected with REQ-004.",
+      "recommendation": "Ask the accountable stakeholders to resolve the conflict and record the decision."
+    },
+    {
+      "id": "QI-021",
+      "requirement_id": "REQ-001",
+      "check": "Potential conflict",
+      "severity": "High",
+      "message": "Potentially opposing statements detected with REQ-007.",
+      "recommendation": "Ask the accountable stakeholders to resolve the conflict and record the decision."
+    },
+    {
+      "id": "QI-022",
+      "requirement_id": "REQ-001",
+      "check": "Potential conflict",
+      "severity": "High",
+      "message": "Potentially opposing statements detected with REQ-008.",
+      "recommendation": "Ask the accountable stakeholders to resolve the conflict and record the decision."
+    },
+    {
+      "id": "QI-023",
+      "requirement_id": "REQ-001",
+      "check": "Potential conflict",
+      "severity": "High",
+      "message": "Potentially opposing statements detected with REQ-009.",
+      "recommendation": "Ask the accountable stakeholders to resolve the conflict and record the decision."
+    },
+    {
+      "id": "QI-024",
+      "requirement_id": "REQ-005",
+      "check": "Potential conflict",
+      "severity": "High",
+      "message": "Potentially opposing statements detected with REQ-010.",
+      "recommendation": "Ask the accountable stakeholders to resolve the conflict and record the decision."
+    },
+    {
+      "id": "QI-025",
+      "requirement_id": "REQ-006",
+      "check": "Potential conflict",
+      "severity": "High",
+      "message": "Potentially opposing statements detected with REQ-010.",
+      "recommendation": "Ask the accountable stakeholders to resolve the conflict and record the decision."
+    },
+    {
+      "id": "QI-026",
+      "requirement_id": "REQ-007",
+      "check": "Potential conflict",
+      "severity": "High",
+      "message": "Potentially opposing statements detected with REQ-010.",
+      "recommendation": "Ask the accountable stakeholders to resolve the conflict and record the decision."
+    },
+    {
+      "id": "QI-027",
+      "requirement_id": "REQ-008",
+      "check": "Potential conflict",
+      "severity": "High",
+      "message": "Potentially opposing statements detected with REQ-010.",
+      "recommendation": "Ask the accountable stakeholders to resolve the conflict and record the decision."
+    },
+    {
+      "id": "QI-028",
+      "requirement_id": "REQ-009",
+      "check": "Potential conflict",
+      "severity": "High",
+      "message": "Potentially opposing statements detected with REQ-010.",
+      "recommendation": "Ask the accountable stakeholders to resolve the conflict and record the decision."
+    }
+  ],
+  "risks": [
+    {
+      "id": "RISK-001",
+      "requirement_id": "REQ-002",
+      "title": "Security risk for REQ-002",
+      "category": "Security",
+      "level": "High",
+      "rationale": "Security controls need review by the accountable security owner.",
+      "mitigation": "Define a measurable control, test evidence, accountable owner, and approval gate.",
+      "owner_role": "Security / technical owner",
+      "status": "Open"
+    },
+    {
+      "id": "RISK-002",
+      "requirement_id": "REQ-003",
+      "title": "Integration risk for REQ-003",
+      "category": "Integration",
+      "level": "Medium",
+      "rationale": "External services need resilience, failure-handling, and ownership review.",
+      "mitigation": "Define a measurable control, test evidence, accountable owner, and approval gate.",
+      "owner_role": "Security / technical owner",
+      "status": "Open"
+    },
+    {
+      "id": "RISK-003",
+      "requirement_id": "REQ-005",
+      "title": "Security risk for REQ-005",
+      "category": "Security",
+      "level": "High",
+      "rationale": "Security controls need review by the accountable security owner.",
+      "mitigation": "Define a measurable control, test evidence, accountable owner, and approval gate.",
+      "owner_role": "Security / technical owner",
+      "status": "Open"
+    },
+    {
+      "id": "RISK-004",
+      "requirement_id": "REQ-005",
+      "title": "Compliance risk for REQ-005",
+      "category": "Compliance",
+      "level": "High",
+      "rationale": "Applicability must be supported by an approved source and confirmed by an authorised reviewer.",
+      "mitigation": "Define a measurable control, test evidence, accountable owner, and approval gate.",
+      "owner_role": "Privacy / compliance reviewer",
+      "status": "Open"
+    },
+    {
+      "id": "RISK-005",
+      "requirement_id": "REQ-006",
+      "title": "Security risk for REQ-006",
+      "category": "Security",
+      "level": "High",
+      "rationale": "Security controls need review by the accountable security owner.",
+      "mitigation": "Define a measurable control, test evidence, accountable owner, and approval gate.",
+      "owner_role": "Security / technical owner",
+      "status": "Open"
+    }
+  ],
+  "traceability": [
+    {
+      "requirement_id": "REQ-001",
+      "source_document": "Stakeholder interview",
+      "source_chunk_id": "chunk-005",
+      "control_ids": [
+        "ECOM-PAYMENT",
+        "ECOM-ORDER-AUDIT"
+      ],
+      "risk_ids": []
+    },
+    {
+      "requirement_id": "REQ-002",
+      "source_document": "Stakeholder interview",
+      "source_chunk_id": "chunk-005",
+      "control_ids": [],
+      "risk_ids": [
+        "RISK-001"
+      ]
+    },
+    {
+      "requirement_id": "REQ-003",
+      "source_document": "Stakeholder interview",
+      "source_chunk_id": "chunk-005",
+      "control_ids": [
+        "ECOM-API-RESILIENCE"
+      ],
+      "risk_ids": [
+        "RISK-002"
+      ]
+    },
+    {
+      "requirement_id": "REQ-004",
+      "source_document": "Stakeholder interview",
+      "source_chunk_id": "chunk-005",
+      "control_ids": [
+        "ECOM-PAYMENT",
+        "ECOM-ORDER-AUDIT"
+      ],
+      "risk_ids": []
+    },
+    {
+      "requirement_id": "REQ-005",
+      "source_document": "Stakeholder interview",
+      "source_chunk_id": "chunk-004",
+      "control_ids": [
+        "ECOM-PAYMENT"
+      ],
+      "risk_ids": [
+        "RISK-003",
+        "RISK-004"
+      ]
+    },
+    {
+      "requirement_id": "REQ-006",
+      "source_document": "Stakeholder interview",
+      "source_chunk_id": "chunk-004",
+      "control_ids": [
+        "ECOM-IDENTITY"
+      ],
+      "risk_ids": [
+        "RISK-005"
+      ]
+    },
+    {
+      "requirement_id": "REQ-007",
+      "source_document": "Stakeholder interview",
+      "source_chunk_id": "chunk-004",
+      "control_ids": [
+        "ECOM-PAYMENT",
+        "ECOM-PRIVACY"
+      ],
+      "risk_ids": []
+    },
+    {
+      "requirement_id": "REQ-008",
+      "source_document": "Stakeholder interview",
+      "source_chunk_id": "chunk-004",
+      "control_ids": [
+        "ECOM-PAYMENT",
+        "ECOM-ORDER-AUDIT"
+      ],
+      "risk_ids": []
+    },
+    {
+      "requirement_id": "REQ-009",
+      "source_document": "Stakeholder interview",
+      "source_chunk_id": "chunk-004",
+      "control_ids": [],
+      "risk_ids": []
+    },
+    {
+      "requirement_id": "REQ-010",
+      "source_document": "Stakeholder interview",
+      "source_chunk_id": "chunk-004",
+      "control_ids": [
+        "ECOM-ORDER-AUDIT"
+      ],
+      "risk_ids": []
+    }
+  ],
+  "artefacts": {
+    "srs": {
+      "title": "Software Requirements Specification: E-commerce Shopping and Order Management System",
+      "requirements": [
+        {
+          "id": "REQ-001",
+          "statement": "The system shall maintain at least 99% availability during normal operating hours and support 500 concurrent users while processing orders and payments without significant performance degradation.",
+          "categories": [
+            "Functional"
+          ],
+          "evidence": [
+            {
+              "document_id": "DOC-001",
+              "document_name": "Stakeholder interview",
+              "chunk_id": "chunk-005",
+              "excerpt": "The system should remain available during peak shopping periods and process orders and payments efficiently.",
+              "relevance": 0.71,
+              "source_url": null,
+              "source_version": null,
+              "effective_date": null
+            }
+          ],
+          "business_justification": "Ensures customers can browse products, place orders, and complete payments reliably, even during periods of high traffic.",
+          "priority": "Should",
+          "dependencies": [],
+          "assumptions": [],
+          "acceptance_criteria": [
+            "The application shall maintain at least 99% availability during the defined measurement period.",
+            "The application shall support 500 concurrent users during load testing.",
+            "95% of order and payment requests shall complete within 3 seconds under the specified test load."
+          ],
+          "applicable_policy": "ECOM-PAYMENT; ECOM-ORDER-AUDIT",
+          "compliance_mappings": [
+            {
+              "control_id": "ECOM-PAYMENT",
+              "source_title": "Payment and checkout security review (advisory practice; not a regulation)",
+              "source_url": "",
+              "jurisdiction": "Project-defined",
+              "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+              "rationale": "Review payment-provider boundaries, checkout integrity, sensitive-data handling, and failure recovery.",
+              "human_approval_required": true
+            },
+            {
+              "control_id": "ECOM-ORDER-AUDIT",
+              "source_title": "Order and administrative auditability (advisory practice; not a regulation)",
+              "source_url": "",
+              "jurisdiction": "Project-defined",
+              "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+              "rationale": "Define traceable order-state changes, privileged actions, and operational evidence.",
+              "human_approval_required": true
+            }
+          ],
+          "risk_level": "Medium",
+          "confidence": 0.71,
+          "reasoning": "Evidence-only draft derived verbatim from the cited source; human refinement is required.",
+          "approval_status": "Needs review"
+        },
+        {
+          "id": "REQ-002",
+          "statement": "The e-commerce application shall be accessible through desktop and mobile browsers, with all major shopping functions working correctly on both platforms.",
+          "categories": [
+            "Security"
+          ],
+          "evidence": [
+            {
+              "document_id": "DOC-001",
+              "document_name": "Stakeholder interview",
+              "chunk_id": "chunk-005",
+              "excerpt": "delivery constraints: The application will initially be developed as a web-based e-commerce platform accessible through desktop and mobile browsers.",
+              "relevance": 0.71,
+              "source_url": null,
+              "source_version": null,
+              "effective_date": null
+            }
+          ],
+          "business_justification": "Ensures customers can access the shopping platform conveniently from different devices.",
+          "priority": "Should",
+          "dependencies": [],
+          "assumptions": [],
+          "acceptance_criteria": [
+            "The application shall support the latest two major versions of Chrome, Firefox, and Edge.",
+            "The application shall display correctly on desktop, tablet, and mobile screen sizes.",
+            "Customers shall be able to browse products, add items to the cart, and place orders on both desktop and mobile browsers."
+          ],
+          "applicable_policy": null,
+          "compliance_mappings": [],
+          "risk_level": "Medium",
+          "confidence": 0.71,
+          "reasoning": "Evidence-only draft derived verbatim from the cited source; human refinement is required.",
+          "approval_status": "Needs review"
+        },
+        {
+          "id": "REQ-003",
+          "statement": "The system shall provide a simple and user-friendly interface that allows customers, administrators, and delivery personnel to perform their respective tasks easily.",
+          "categories": [
+            "Integration"
+          ],
+          "evidence": [
+            {
+              "document_id": "DOC-001",
+              "document_name": "Stakeholder interview",
+              "chunk_id": "chunk-005",
+              "excerpt": "It should provide a simple and user-friendly interface for customers, administrators, and delivery personnel.",
+              "relevance": 0.71,
+              "source_url": null,
+              "source_version": null,
+              "effective_date": null
+            }
+          ],
+          "business_justification": "Ensures that all users can interact with the application easily without requiring technical knowledge.",
+          "priority": "Should",
+          "dependencies": [],
+          "assumptions": [],
+          "acceptance_criteria": [
+            "Customers shall be able to find products and add them to their cart within three navigation steps.",
+            "Administrators shall be able to add, update, and remove product information.",
+            "Delivery personnel shall be able to view assigned orders and update delivery status.",
+            "The interface shall display clear error messages when users enter invalid information."
+          ],
+          "applicable_policy": "ECOM-API-RESILIENCE",
+          "compliance_mappings": [
+            {
+              "control_id": "ECOM-API-RESILIENCE",
+              "source_title": "Marketplace and integration resilience (advisory practice; not a regulation)",
+              "source_url": "",
+              "jurisdiction": "Project-defined",
+              "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+              "rationale": "Review interface ownership, validation, retries, idempotency, and failure handling.",
+              "human_approval_required": true
+            }
+          ],
+          "risk_level": "Medium",
+          "confidence": 0.71,
+          "reasoning": "Evidence-only draft derived verbatim from the cited source; human refinement is required.",
+          "approval_status": "Needs review"
+        },
+        {
+          "id": "REQ-004",
+          "statement": "The system will be developed in multiple stages, starting with product browsing, cart management, payment processing, and order tracking, followed by additional features based on user feedback.",
+          "categories": [
+            "Functional"
+          ],
+          "evidence": [
+            {
+              "document_id": "DOC-001",
+              "document_name": "Stakeholder interview",
+              "chunk_id": "chunk-005",
+              "excerpt": "The system will be developed in multiple stages, starting with product browsing, cart management, payment processing, and order tracking, followed by additional features based on user feedback.",
+              "relevance": 0.71,
+              "source_url": null,
+              "source_version": null,
+              "effective_date": null
+            }
+          ],
+          "business_justification": "Supports the documented E-commerce Shopping and Order Management System need.",
+          "priority": "Should",
+          "dependencies": [],
+          "assumptions": [],
+          "acceptance_criteria": [
+            "A reviewer must confirm measurable acceptance criteria before baseline approval."
+          ],
+          "applicable_policy": "ECOM-PAYMENT; ECOM-ORDER-AUDIT",
+          "compliance_mappings": [
+            {
+              "control_id": "ECOM-PAYMENT",
+              "source_title": "Payment and checkout security review (advisory practice; not a regulation)",
+              "source_url": "",
+              "jurisdiction": "Project-defined",
+              "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+              "rationale": "Review payment-provider boundaries, checkout integrity, sensitive-data handling, and failure recovery.",
+              "human_approval_required": true
+            },
+            {
+              "control_id": "ECOM-ORDER-AUDIT",
+              "source_title": "Order and administrative auditability (advisory practice; not a regulation)",
+              "source_url": "",
+              "jurisdiction": "Project-defined",
+              "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+              "rationale": "Define traceable order-state changes, privileged actions, and operational evidence.",
+              "human_approval_required": true
+            }
+          ],
+          "risk_level": "Medium",
+          "confidence": 0.71,
+          "reasoning": "Evidence-only draft derived verbatim from the cited source; human refinement is required.",
+          "approval_status": "Needs review"
+        },
+        {
+          "id": "REQ-005",
+          "statement": "security and compliance: The application should protect customer information such as personal details, passwords, and payment data.",
+          "categories": [
+            "Security",
+            "Regulatory",
+            "Data management"
+          ],
+          "evidence": [
+            {
+              "document_id": "DOC-001",
+              "document_name": "Stakeholder interview",
+              "chunk_id": "chunk-004",
+              "excerpt": "security and compliance: The application should protect customer information such as personal details, passwords, and payment data.",
+              "relevance": 0.69,
+              "source_url": null,
+              "source_version": null,
+              "effective_date": null
+            }
+          ],
+          "business_justification": "Supports the documented E-commerce Shopping and Order Management System need.",
+          "priority": "Should",
+          "dependencies": [],
+          "assumptions": [],
+          "acceptance_criteria": [
+            "A reviewer must confirm measurable acceptance criteria before baseline approval."
+          ],
+          "applicable_policy": "ECOM-PAYMENT",
+          "compliance_mappings": [
+            {
+              "control_id": "ECOM-PAYMENT",
+              "source_title": "Payment and checkout security review (advisory practice; not a regulation)",
+              "source_url": "",
+              "jurisdiction": "Project-defined",
+              "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+              "rationale": "Review payment-provider boundaries, checkout integrity, sensitive-data handling, and failure recovery.",
+              "human_approval_required": true
+            }
+          ],
+          "risk_level": "Medium",
+          "confidence": 0.69,
+          "reasoning": "Evidence-only draft derived verbatim from the cited source; human refinement is required.",
+          "approval_status": "Needs review"
+        },
+        {
+          "id": "REQ-006",
+          "statement": "User authentication and role-based access should be provided to prevent unauthorised access.",
+          "categories": [
+            "Security"
+          ],
+          "evidence": [
+            {
+              "document_id": "DOC-001",
+              "document_name": "Stakeholder interview",
+              "chunk_id": "chunk-004",
+              "excerpt": "User authentication and role-based access should be provided to prevent unauthorised access.",
+              "relevance": 0.69,
+              "source_url": null,
+              "source_version": null,
+              "effective_date": null
+            }
+          ],
+          "business_justification": "Supports the documented E-commerce Shopping and Order Management System need.",
+          "priority": "Should",
+          "dependencies": [],
+          "assumptions": [],
+          "acceptance_criteria": [
+            "A reviewer must confirm measurable acceptance criteria before baseline approval."
+          ],
+          "applicable_policy": "ECOM-IDENTITY",
+          "compliance_mappings": [
+            {
+              "control_id": "ECOM-IDENTITY",
+              "source_title": "Customer and staff identity controls (advisory practice; not a regulation)",
+              "source_url": "",
+              "jurisdiction": "Project-defined",
+              "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+              "rationale": "Review authentication, account recovery, session handling, and staff access boundaries.",
+              "human_approval_required": true
+            }
+          ],
+          "risk_level": "Medium",
+          "confidence": 0.69,
+          "reasoning": "Evidence-only draft derived verbatim from the cited source; human refinement is required.",
+          "approval_status": "Needs review"
+        },
+        {
+          "id": "REQ-007",
+          "statement": "Payment transactions must be processed securely, and customer data should be protected during storage and transmission.",
+          "categories": [
+            "Data management"
+          ],
+          "evidence": [
+            {
+              "document_id": "DOC-001",
+              "document_name": "Stakeholder interview",
+              "chunk_id": "chunk-004",
+              "excerpt": "Payment transactions must be processed securely, and customer data should be protected during storage and transmission.",
+              "relevance": 0.69,
+              "source_url": null,
+              "source_version": null,
+              "effective_date": null
+            }
+          ],
+          "business_justification": "Supports the documented E-commerce Shopping and Order Management System need.",
+          "priority": "Should",
+          "dependencies": [],
+          "assumptions": [],
+          "acceptance_criteria": [
+            "A reviewer must confirm measurable acceptance criteria before baseline approval."
+          ],
+          "applicable_policy": "ECOM-PAYMENT; ECOM-PRIVACY",
+          "compliance_mappings": [
+            {
+              "control_id": "ECOM-PAYMENT",
+              "source_title": "Payment and checkout security review (advisory practice; not a regulation)",
+              "source_url": "",
+              "jurisdiction": "Project-defined",
+              "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+              "rationale": "Review payment-provider boundaries, checkout integrity, sensitive-data handling, and failure recovery.",
+              "human_approval_required": true
+            },
+            {
+              "control_id": "ECOM-PRIVACY",
+              "source_title": "Customer data privacy review (advisory practice; not a regulation)",
+              "source_url": "",
+              "jurisdiction": "Project-defined",
+              "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+              "rationale": "Confirm data purpose, minimisation, access, retention, and deletion against an approved project policy.",
+              "human_approval_required": true
+            }
+          ],
+          "risk_level": "Medium",
+          "confidence": 0.69,
+          "reasoning": "Evidence-only draft derived verbatim from the cited source; human refinement is required.",
+          "approval_status": "Needs review"
+        },
+        {
+          "id": "REQ-008",
+          "statement": "The system should also provide secure order and transaction records.",
+          "categories": [
+            "Data management"
+          ],
+          "evidence": [
+            {
+              "document_id": "DOC-001",
+              "document_name": "Stakeholder interview",
+              "chunk_id": "chunk-004",
+              "excerpt": "The system should also provide secure order and transaction records.",
+              "relevance": 0.69,
+              "source_url": null,
+              "source_version": null,
+              "effective_date": null
+            }
+          ],
+          "business_justification": "Supports the documented E-commerce Shopping and Order Management System need.",
+          "priority": "Should",
+          "dependencies": [],
+          "assumptions": [],
+          "acceptance_criteria": [
+            "A reviewer must confirm measurable acceptance criteria before baseline approval."
+          ],
+          "applicable_policy": "ECOM-PAYMENT; ECOM-ORDER-AUDIT",
+          "compliance_mappings": [
+            {
+              "control_id": "ECOM-PAYMENT",
+              "source_title": "Payment and checkout security review (advisory practice; not a regulation)",
+              "source_url": "",
+              "jurisdiction": "Project-defined",
+              "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+              "rationale": "Review payment-provider boundaries, checkout integrity, sensitive-data handling, and failure recovery.",
+              "human_approval_required": true
+            },
+            {
+              "control_id": "ECOM-ORDER-AUDIT",
+              "source_title": "Order and administrative auditability (advisory practice; not a regulation)",
+              "source_url": "",
+              "jurisdiction": "Project-defined",
+              "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+              "rationale": "Define traceable order-state changes, privileged actions, and operational evidence.",
+              "human_approval_required": true
+            }
+          ],
+          "risk_level": "Medium",
+          "confidence": 0.69,
+          "reasoning": "Evidence-only draft derived verbatim from the cited source; human refinement is required.",
+          "approval_status": "Needs review"
+        },
+        {
+          "id": "REQ-009",
+          "statement": "service levels and scale: The e-commerce application should support multiple customers browsing and purchasing products simultaneously.",
+          "categories": [
+            "Functional"
+          ],
+          "evidence": [
+            {
+              "document_id": "DOC-001",
+              "document_name": "Stakeholder interview",
+              "chunk_id": "chunk-004",
+              "excerpt": "service levels and scale: The e-commerce application should support multiple customers browsing and purchasing products simultaneously.",
+              "relevance": 0.69,
+              "source_url": null,
+              "source_version": null,
+              "effective_date": null
+            }
+          ],
+          "business_justification": "Supports the documented E-commerce Shopping and Order Management System need.",
+          "priority": "Should",
+          "dependencies": [],
+          "assumptions": [],
+          "acceptance_criteria": [
+            "A reviewer must confirm measurable acceptance criteria before baseline approval."
+          ],
+          "applicable_policy": null,
+          "compliance_mappings": [],
+          "risk_level": "Medium",
+          "confidence": 0.69,
+          "reasoning": "Evidence-only draft derived verbatim from the cited source; human refinement is required.",
+          "approval_status": "Needs review"
+        },
+        {
+          "id": "REQ-010",
+          "statement": "It should handle increasing numbers of products, orders, and users without affecting performance.",
+          "categories": [
+            "Performance"
+          ],
+          "evidence": [
+            {
+              "document_id": "DOC-001",
+              "document_name": "Stakeholder interview",
+              "chunk_id": "chunk-004",
+              "excerpt": "It should handle increasing numbers of products, orders, and users without affecting performance.",
+              "relevance": 0.69,
+              "source_url": null,
+              "source_version": null,
+              "effective_date": null
+            }
+          ],
+          "business_justification": "Supports the documented E-commerce Shopping and Order Management System need.",
+          "priority": "Should",
+          "dependencies": [],
+          "assumptions": [],
+          "acceptance_criteria": [
+            "A reviewer must confirm measurable acceptance criteria before baseline approval."
+          ],
+          "applicable_policy": "ECOM-ORDER-AUDIT",
+          "compliance_mappings": [
+            {
+              "control_id": "ECOM-ORDER-AUDIT",
+              "source_title": "Order and administrative auditability (advisory practice; not a regulation)",
+              "source_url": "",
+              "jurisdiction": "Project-defined",
+              "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+              "rationale": "Define traceable order-state changes, privileged actions, and operational evidence.",
+              "human_approval_required": true
+            }
+          ],
+          "risk_level": "Medium",
+          "confidence": 0.69,
+          "reasoning": "Evidence-only draft derived verbatim from the cited source; human refinement is required.",
+          "approval_status": "Needs review"
+        }
+      ]
+    },
+    "user_stories": [
+      {
+        "id": "US-001",
+        "story": "As a relevant stakeholder, I want the system shall maintain at least 99% availability during normal operating hours and support 500 concurrent users while processing orders and payments without significant performance degradation. so that Ensures customers can browse products, place orders, and complete payments reliably, even during periods of high traffic.",
+        "acceptance_criteria": [
+          "The application shall maintain at least 99% availability during the defined measurement period.",
+          "The application shall support 500 concurrent users during load testing.",
+          "95% of order and payment requests shall complete within 3 seconds under the specified test load."
+        ],
+        "requirement_id": "REQ-001"
+      },
+      {
+        "id": "US-002",
+        "story": "As a relevant stakeholder, I want the e-commerce application shall be accessible through desktop and mobile browsers, with all major shopping functions working correctly on both platforms. so that Ensures customers can access the shopping platform conveniently from different devices.",
+        "acceptance_criteria": [
+          "The application shall support the latest two major versions of Chrome, Firefox, and Edge.",
+          "The application shall display correctly on desktop, tablet, and mobile screen sizes.",
+          "Customers shall be able to browse products, add items to the cart, and place orders on both desktop and mobile browsers."
+        ],
+        "requirement_id": "REQ-002"
+      },
+      {
+        "id": "US-003",
+        "story": "As a relevant stakeholder, I want the system shall provide a simple and user-friendly interface that allows customers, administrators, and delivery personnel to perform their respective tasks easily. so that Ensures that all users can interact with the application easily without requiring technical knowledge.",
+        "acceptance_criteria": [
+          "Customers shall be able to find products and add them to their cart within three navigation steps.",
+          "Administrators shall be able to add, update, and remove product information.",
+          "Delivery personnel shall be able to view assigned orders and update delivery status.",
+          "The interface shall display clear error messages when users enter invalid information."
+        ],
+        "requirement_id": "REQ-003"
+      },
+      {
+        "id": "US-004",
+        "story": "As a relevant stakeholder, I want the system will be developed in multiple stages, starting with product browsing, cart management, payment processing, and order tracking, followed by additional features based on user feedback. so that Supports the documented E-commerce Shopping and Order Management System need.",
+        "acceptance_criteria": [
+          "A reviewer must confirm measurable acceptance criteria before baseline approval."
+        ],
+        "requirement_id": "REQ-004"
+      },
+      {
+        "id": "US-005",
+        "story": "As a relevant stakeholder, I want security and compliance: The application should protect customer information such as personal details, passwords, and payment data. so that Supports the documented E-commerce Shopping and Order Management System need.",
+        "acceptance_criteria": [
+          "A reviewer must confirm measurable acceptance criteria before baseline approval."
+        ],
+        "requirement_id": "REQ-005"
+      },
+      {
+        "id": "US-006",
+        "story": "As a relevant stakeholder, I want user authentication and role-based access should be provided to prevent unauthorised access. so that Supports the documented E-commerce Shopping and Order Management System need.",
+        "acceptance_criteria": [
+          "A reviewer must confirm measurable acceptance criteria before baseline approval."
+        ],
+        "requirement_id": "REQ-006"
+      },
+      {
+        "id": "US-007",
+        "story": "As a relevant stakeholder, I want payment transactions must be processed securely, and customer data should be protected during storage and transmission. so that Supports the documented E-commerce Shopping and Order Management System need.",
+        "acceptance_criteria": [
+          "A reviewer must confirm measurable acceptance criteria before baseline approval."
+        ],
+        "requirement_id": "REQ-007"
+      },
+      {
+        "id": "US-008",
+        "story": "As a relevant stakeholder, I want the system should also provide secure order and transaction records. so that Supports the documented E-commerce Shopping and Order Management System need.",
+        "acceptance_criteria": [
+          "A reviewer must confirm measurable acceptance criteria before baseline approval."
+        ],
+        "requirement_id": "REQ-008"
+      },
+      {
+        "id": "US-009",
+        "story": "As a relevant stakeholder, I want service levels and scale: The e-commerce application should support multiple customers browsing and purchasing products simultaneously. so that Supports the documented E-commerce Shopping and Order Management System need.",
+        "acceptance_criteria": [
+          "A reviewer must confirm measurable acceptance criteria before baseline approval."
+        ],
+        "requirement_id": "REQ-009"
+      },
+      {
+        "id": "US-010",
+        "story": "As a relevant stakeholder, I want it should handle increasing numbers of products, orders, and users without affecting performance. so that Supports the documented E-commerce Shopping and Order Management System need.",
+        "acceptance_criteria": [
+          "A reviewer must confirm measurable acceptance criteria before baseline approval."
+        ],
+        "requirement_id": "REQ-010"
+      }
+    ],
+    "use_cases": [
+      {
+        "id": "UC-001",
+        "name": "The system shall maintain at least 99% availability during normal operating hours and support 500 co",
+        "actors": "To be confirmed by stakeholder",
+        "preconditions": [],
+        "success_criteria": [
+          "The application shall maintain at least 99% availability during the defined measurement period.",
+          "The application shall support 500 concurrent users during load testing.",
+          "95% of order and payment requests shall complete within 3 seconds under the specified test load."
+        ],
+        "requirement_id": "REQ-001"
+      },
+      {
+        "id": "UC-002",
+        "name": "The e-commerce application shall be accessible through desktop and mobile browsers, with all major s",
+        "actors": "To be confirmed by stakeholder",
+        "preconditions": [],
+        "success_criteria": [
+          "The application shall support the latest two major versions of Chrome, Firefox, and Edge.",
+          "The application shall display correctly on desktop, tablet, and mobile screen sizes.",
+          "Customers shall be able to browse products, add items to the cart, and place orders on both desktop and mobile browsers."
+        ],
+        "requirement_id": "REQ-002"
+      },
+      {
+        "id": "UC-003",
+        "name": "The system shall provide a simple and user-friendly interface that allows customers, administrators,",
+        "actors": "To be confirmed by stakeholder",
+        "preconditions": [],
+        "success_criteria": [
+          "Customers shall be able to find products and add them to their cart within three navigation steps.",
+          "Administrators shall be able to add, update, and remove product information.",
+          "Delivery personnel shall be able to view assigned orders and update delivery status.",
+          "The interface shall display clear error messages when users enter invalid information."
+        ],
+        "requirement_id": "REQ-003"
+      },
+      {
+        "id": "UC-004",
+        "name": "The system will be developed in multiple stages, starting with product browsing, cart management, pa",
+        "actors": "To be confirmed by stakeholder",
+        "preconditions": [],
+        "success_criteria": [
+          "A reviewer must confirm measurable acceptance criteria before baseline approval."
+        ],
+        "requirement_id": "REQ-004"
+      },
+      {
+        "id": "UC-005",
+        "name": "security and compliance: The application should protect customer information such as personal detail",
+        "actors": "To be confirmed by stakeholder",
+        "preconditions": [],
+        "success_criteria": [
+          "A reviewer must confirm measurable acceptance criteria before baseline approval."
+        ],
+        "requirement_id": "REQ-005"
+      },
+      {
+        "id": "UC-006",
+        "name": "User authentication and role-based access should be provided to prevent unauthorised access.",
+        "actors": "To be confirmed by stakeholder",
+        "preconditions": [],
+        "success_criteria": [
+          "A reviewer must confirm measurable acceptance criteria before baseline approval."
+        ],
+        "requirement_id": "REQ-006"
+      },
+      {
+        "id": "UC-007",
+        "name": "Payment transactions must be processed securely, and customer data should be protected during storag",
+        "actors": "To be confirmed by stakeholder",
+        "preconditions": [],
+        "success_criteria": [
+          "A reviewer must confirm measurable acceptance criteria before baseline approval."
+        ],
+        "requirement_id": "REQ-007"
+      },
+      {
+        "id": "UC-008",
+        "name": "The system should also provide secure order and transaction records.",
+        "actors": "To be confirmed by stakeholder",
+        "preconditions": [],
+        "success_criteria": [
+          "A reviewer must confirm measurable acceptance criteria before baseline approval."
+        ],
+        "requirement_id": "REQ-008"
+      },
+      {
+        "id": "UC-009",
+        "name": "service levels and scale: The e-commerce application should support multiple customers browsing and ",
+        "actors": "To be confirmed by stakeholder",
+        "preconditions": [],
+        "success_criteria": [
+          "A reviewer must confirm measurable acceptance criteria before baseline approval."
+        ],
+        "requirement_id": "REQ-009"
+      },
+      {
+        "id": "UC-010",
+        "name": "It should handle increasing numbers of products, orders, and users without affecting performance.",
+        "actors": "To be confirmed by stakeholder",
+        "preconditions": [],
+        "success_criteria": [
+          "A reviewer must confirm measurable acceptance criteria before baseline approval."
+        ],
+        "requirement_id": "REQ-010"
+      }
+    ],
+    "risk_register": [
+      {
+        "id": "RISK-001",
+        "requirement_id": "REQ-002",
+        "title": "Security risk for REQ-002",
+        "category": "Security",
+        "level": "High",
+        "rationale": "Security controls need review by the accountable security owner.",
+        "mitigation": "Define a measurable control, test evidence, accountable owner, and approval gate.",
+        "owner_role": "Security / technical owner",
+        "status": "Open"
+      },
+      {
+        "id": "RISK-002",
+        "requirement_id": "REQ-003",
+        "title": "Integration risk for REQ-003",
+        "category": "Integration",
+        "level": "Medium",
+        "rationale": "External services need resilience, failure-handling, and ownership review.",
+        "mitigation": "Define a measurable control, test evidence, accountable owner, and approval gate.",
+        "owner_role": "Security / technical owner",
+        "status": "Open"
+      },
+      {
+        "id": "RISK-003",
+        "requirement_id": "REQ-005",
+        "title": "Security risk for REQ-005",
+        "category": "Security",
+        "level": "High",
+        "rationale": "Security controls need review by the accountable security owner.",
+        "mitigation": "Define a measurable control, test evidence, accountable owner, and approval gate.",
+        "owner_role": "Security / technical owner",
+        "status": "Open"
+      },
+      {
+        "id": "RISK-004",
+        "requirement_id": "REQ-005",
+        "title": "Compliance risk for REQ-005",
+        "category": "Compliance",
+        "level": "High",
+        "rationale": "Applicability must be supported by an approved source and confirmed by an authorised reviewer.",
+        "mitigation": "Define a measurable control, test evidence, accountable owner, and approval gate.",
+        "owner_role": "Privacy / compliance reviewer",
+        "status": "Open"
+      },
+      {
+        "id": "RISK-005",
+        "requirement_id": "REQ-006",
+        "title": "Security risk for REQ-006",
+        "category": "Security",
+        "level": "High",
+        "rationale": "Security controls need review by the accountable security owner.",
+        "mitigation": "Define a measurable control, test evidence, accountable owner, and approval gate.",
+        "owner_role": "Security / technical owner",
+        "status": "Open"
+      }
+    ],
+    "threat_and_risk_register": [
+      {
+        "id": "RISK-001",
+        "requirement_id": "REQ-002",
+        "title": "Security risk for REQ-002",
+        "category": "Security",
+        "level": "High",
+        "rationale": "Security controls need review by the accountable security owner.",
+        "mitigation": "Define a measurable control, test evidence, accountable owner, and approval gate.",
+        "owner_role": "Security / technical owner",
+        "status": "Open",
+        "linked_requirement": "REQ-002"
+      },
+      {
+        "id": "RISK-002",
+        "requirement_id": "REQ-003",
+        "title": "Integration risk for REQ-003",
+        "category": "Integration",
+        "level": "Medium",
+        "rationale": "External services need resilience, failure-handling, and ownership review.",
+        "mitigation": "Define a measurable control, test evidence, accountable owner, and approval gate.",
+        "owner_role": "Security / technical owner",
+        "status": "Open",
+        "linked_requirement": "REQ-003"
+      },
+      {
+        "id": "RISK-003",
+        "requirement_id": "REQ-005",
+        "title": "Security risk for REQ-005",
+        "category": "Security",
+        "level": "High",
+        "rationale": "Security controls need review by the accountable security owner.",
+        "mitigation": "Define a measurable control, test evidence, accountable owner, and approval gate.",
+        "owner_role": "Security / technical owner",
+        "status": "Open",
+        "linked_requirement": "REQ-005"
+      },
+      {
+        "id": "RISK-004",
+        "requirement_id": "REQ-005",
+        "title": "Compliance risk for REQ-005",
+        "category": "Compliance",
+        "level": "High",
+        "rationale": "Applicability must be supported by an approved source and confirmed by an authorised reviewer.",
+        "mitigation": "Define a measurable control, test evidence, accountable owner, and approval gate.",
+        "owner_role": "Privacy / compliance reviewer",
+        "status": "Open",
+        "linked_requirement": "REQ-005"
+      },
+      {
+        "id": "RISK-005",
+        "requirement_id": "REQ-006",
+        "title": "Security risk for REQ-006",
+        "category": "Security",
+        "level": "High",
+        "rationale": "Security controls need review by the accountable security owner.",
+        "mitigation": "Define a measurable control, test evidence, accountable owner, and approval gate.",
+        "owner_role": "Security / technical owner",
+        "status": "Open",
+        "linked_requirement": "REQ-006"
+      }
+    ],
+    "traceability_matrix": [
+      {
+        "requirement_id": "REQ-001",
+        "source_document": "Stakeholder interview",
+        "source_chunk_id": "chunk-005",
+        "control_ids": [
+          "ECOM-PAYMENT",
+          "ECOM-ORDER-AUDIT"
+        ],
+        "risk_ids": []
+      },
+      {
+        "requirement_id": "REQ-002",
+        "source_document": "Stakeholder interview",
+        "source_chunk_id": "chunk-005",
+        "control_ids": [],
+        "risk_ids": [
+          "RISK-001"
+        ]
+      },
+      {
+        "requirement_id": "REQ-003",
+        "source_document": "Stakeholder interview",
+        "source_chunk_id": "chunk-005",
+        "control_ids": [
+          "ECOM-API-RESILIENCE"
+        ],
+        "risk_ids": [
+          "RISK-002"
+        ]
+      },
+      {
+        "requirement_id": "REQ-004",
+        "source_document": "Stakeholder interview",
+        "source_chunk_id": "chunk-005",
+        "control_ids": [
+          "ECOM-PAYMENT",
+          "ECOM-ORDER-AUDIT"
+        ],
+        "risk_ids": []
+      },
+      {
+        "requirement_id": "REQ-005",
+        "source_document": "Stakeholder interview",
+        "source_chunk_id": "chunk-004",
+        "control_ids": [
+          "ECOM-PAYMENT"
+        ],
+        "risk_ids": [
+          "RISK-003",
+          "RISK-004"
+        ]
+      },
+      {
+        "requirement_id": "REQ-006",
+        "source_document": "Stakeholder interview",
+        "source_chunk_id": "chunk-004",
+        "control_ids": [
+          "ECOM-IDENTITY"
+        ],
+        "risk_ids": [
+          "RISK-005"
+        ]
+      },
+      {
+        "requirement_id": "REQ-007",
+        "source_document": "Stakeholder interview",
+        "source_chunk_id": "chunk-004",
+        "control_ids": [
+          "ECOM-PAYMENT",
+          "ECOM-PRIVACY"
+        ],
+        "risk_ids": []
+      },
+      {
+        "requirement_id": "REQ-008",
+        "source_document": "Stakeholder interview",
+        "source_chunk_id": "chunk-004",
+        "control_ids": [
+          "ECOM-PAYMENT",
+          "ECOM-ORDER-AUDIT"
+        ],
+        "risk_ids": []
+      },
+      {
+        "requirement_id": "REQ-009",
+        "source_document": "Stakeholder interview",
+        "source_chunk_id": "chunk-004",
+        "control_ids": [],
+        "risk_ids": []
+      },
+      {
+        "requirement_id": "REQ-010",
+        "source_document": "Stakeholder interview",
+        "source_chunk_id": "chunk-004",
+        "control_ids": [
+          "ECOM-ORDER-AUDIT"
+        ],
+        "risk_ids": []
+      }
+    ],
+    "assumptions_and_dependencies": [
+      {
+        "requirement_id": "REQ-001",
+        "assumptions": [],
+        "dependencies": []
+      },
+      {
+        "requirement_id": "REQ-002",
+        "assumptions": [],
+        "dependencies": []
+      },
+      {
+        "requirement_id": "REQ-003",
+        "assumptions": [],
+        "dependencies": []
+      },
+      {
+        "requirement_id": "REQ-004",
+        "assumptions": [],
+        "dependencies": []
+      },
+      {
+        "requirement_id": "REQ-005",
+        "assumptions": [],
+        "dependencies": []
+      },
+      {
+        "requirement_id": "REQ-006",
+        "assumptions": [],
+        "dependencies": []
+      },
+      {
+        "requirement_id": "REQ-007",
+        "assumptions": [],
+        "dependencies": []
+      },
+      {
+        "requirement_id": "REQ-008",
+        "assumptions": [],
+        "dependencies": []
+      },
+      {
+        "requirement_id": "REQ-009",
+        "assumptions": [],
+        "dependencies": []
+      },
+      {
+        "requirement_id": "REQ-010",
+        "assumptions": [],
+        "dependencies": []
+      }
+    ],
+    "data_requirements": [
+      {
+        "id": "REQ-005",
+        "statement": "security and compliance: The application should protect customer information such as personal details, passwords, and payment data.",
+        "categories": [
+          "Security",
+          "Regulatory",
+          "Data management"
+        ],
+        "evidence": [
+          {
+            "document_id": "DOC-001",
+            "document_name": "Stakeholder interview",
+            "chunk_id": "chunk-004",
+            "excerpt": "security and compliance: The application should protect customer information such as personal details, passwords, and payment data.",
+            "relevance": 0.69,
+            "source_url": null,
+            "source_version": null,
+            "effective_date": null
+          }
+        ],
+        "business_justification": "Supports the documented E-commerce Shopping and Order Management System need.",
+        "priority": "Should",
+        "dependencies": [],
+        "assumptions": [],
+        "acceptance_criteria": [
+          "A reviewer must confirm measurable acceptance criteria before baseline approval."
+        ],
+        "applicable_policy": "ECOM-PAYMENT",
+        "compliance_mappings": [
+          {
+            "control_id": "ECOM-PAYMENT",
+            "source_title": "Payment and checkout security review (advisory practice; not a regulation)",
+            "source_url": "",
+            "jurisdiction": "Project-defined",
+            "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+            "rationale": "Review payment-provider boundaries, checkout integrity, sensitive-data handling, and failure recovery.",
+            "human_approval_required": true
+          }
+        ],
+        "risk_level": "Medium",
+        "confidence": 0.69,
+        "reasoning": "Evidence-only draft derived verbatim from the cited source; human refinement is required.",
+        "approval_status": "Needs review"
+      },
+      {
+        "id": "REQ-007",
+        "statement": "Payment transactions must be processed securely, and customer data should be protected during storage and transmission.",
+        "categories": [
+          "Data management"
+        ],
+        "evidence": [
+          {
+            "document_id": "DOC-001",
+            "document_name": "Stakeholder interview",
+            "chunk_id": "chunk-004",
+            "excerpt": "Payment transactions must be processed securely, and customer data should be protected during storage and transmission.",
+            "relevance": 0.69,
+            "source_url": null,
+            "source_version": null,
+            "effective_date": null
+          }
+        ],
+        "business_justification": "Supports the documented E-commerce Shopping and Order Management System need.",
+        "priority": "Should",
+        "dependencies": [],
+        "assumptions": [],
+        "acceptance_criteria": [
+          "A reviewer must confirm measurable acceptance criteria before baseline approval."
+        ],
+        "applicable_policy": "ECOM-PAYMENT; ECOM-PRIVACY",
+        "compliance_mappings": [
+          {
+            "control_id": "ECOM-PAYMENT",
+            "source_title": "Payment and checkout security review (advisory practice; not a regulation)",
+            "source_url": "",
+            "jurisdiction": "Project-defined",
+            "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+            "rationale": "Review payment-provider boundaries, checkout integrity, sensitive-data handling, and failure recovery.",
+            "human_approval_required": true
+          },
+          {
+            "control_id": "ECOM-PRIVACY",
+            "source_title": "Customer data privacy review (advisory practice; not a regulation)",
+            "source_url": "",
+            "jurisdiction": "Project-defined",
+            "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+            "rationale": "Confirm data purpose, minimisation, access, retention, and deletion against an approved project policy.",
+            "human_approval_required": true
+          }
+        ],
+        "risk_level": "Medium",
+        "confidence": 0.69,
+        "reasoning": "Evidence-only draft derived verbatim from the cited source; human refinement is required.",
+        "approval_status": "Needs review"
+      },
+      {
+        "id": "REQ-008",
+        "statement": "The system should also provide secure order and transaction records.",
+        "categories": [
+          "Data management"
+        ],
+        "evidence": [
+          {
+            "document_id": "DOC-001",
+            "document_name": "Stakeholder interview",
+            "chunk_id": "chunk-004",
+            "excerpt": "The system should also provide secure order and transaction records.",
+            "relevance": 0.69,
+            "source_url": null,
+            "source_version": null,
+            "effective_date": null
+          }
+        ],
+        "business_justification": "Supports the documented E-commerce Shopping and Order Management System need.",
+        "priority": "Should",
+        "dependencies": [],
+        "assumptions": [],
+        "acceptance_criteria": [
+          "A reviewer must confirm measurable acceptance criteria before baseline approval."
+        ],
+        "applicable_policy": "ECOM-PAYMENT; ECOM-ORDER-AUDIT",
+        "compliance_mappings": [
+          {
+            "control_id": "ECOM-PAYMENT",
+            "source_title": "Payment and checkout security review (advisory practice; not a regulation)",
+            "source_url": "",
+            "jurisdiction": "Project-defined",
+            "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+            "rationale": "Review payment-provider boundaries, checkout integrity, sensitive-data handling, and failure recovery.",
+            "human_approval_required": true
+          },
+          {
+            "control_id": "ECOM-ORDER-AUDIT",
+            "source_title": "Order and administrative auditability (advisory practice; not a regulation)",
+            "source_url": "",
+            "jurisdiction": "Project-defined",
+            "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+            "rationale": "Define traceable order-state changes, privileged actions, and operational evidence.",
+            "human_approval_required": true
+          }
+        ],
+        "risk_level": "Medium",
+        "confidence": 0.69,
+        "reasoning": "Evidence-only draft derived verbatim from the cited source; human refinement is required.",
+        "approval_status": "Needs review"
+      }
+    ],
+    "interface_requirements": [
+      {
+        "id": "REQ-003",
+        "statement": "The system shall provide a simple and user-friendly interface that allows customers, administrators, and delivery personnel to perform their respective tasks easily.",
+        "categories": [
+          "Integration"
+        ],
+        "evidence": [
+          {
+            "document_id": "DOC-001",
+            "document_name": "Stakeholder interview",
+            "chunk_id": "chunk-005",
+            "excerpt": "It should provide a simple and user-friendly interface for customers, administrators, and delivery personnel.",
+            "relevance": 0.71,
+            "source_url": null,
+            "source_version": null,
+            "effective_date": null
+          }
+        ],
+        "business_justification": "Ensures that all users can interact with the application easily without requiring technical knowledge.",
+        "priority": "Should",
+        "dependencies": [],
+        "assumptions": [],
+        "acceptance_criteria": [
+          "Customers shall be able to find products and add them to their cart within three navigation steps.",
+          "Administrators shall be able to add, update, and remove product information.",
+          "Delivery personnel shall be able to view assigned orders and update delivery status.",
+          "The interface shall display clear error messages when users enter invalid information."
+        ],
+        "applicable_policy": "ECOM-API-RESILIENCE",
+        "compliance_mappings": [
+          {
+            "control_id": "ECOM-API-RESILIENCE",
+            "source_title": "Marketplace and integration resilience (advisory practice; not a regulation)",
+            "source_url": "",
+            "jurisdiction": "Project-defined",
+            "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+            "rationale": "Review interface ownership, validation, retries, idempotency, and failure handling.",
+            "human_approval_required": true
+          }
+        ],
+        "risk_level": "Medium",
+        "confidence": 0.71,
+        "reasoning": "Evidence-only draft derived verbatim from the cited source; human refinement is required.",
+        "approval_status": "Needs review"
+      }
+    ],
+    "open_issues": [
+      {
+        "id": "QI-002",
+        "requirement_id": "REQ-003",
+        "check": "Ambiguity",
+        "severity": "Medium",
+        "message": "The requirement contains a qualitative term without a measurable threshold.",
+        "recommendation": "Define an observable metric, limit, or acceptance test."
+      },
+      {
+        "id": "QI-004",
+        "requirement_id": "REQ-004",
+        "check": "Lack of testability",
+        "severity": "Medium",
+        "message": "Acceptance criteria are absent or not yet measurable.",
+        "recommendation": "Add pass/fail criteria, test data, and expected outcome."
+      },
+      {
+        "id": "QI-006",
+        "requirement_id": "REQ-005",
+        "check": "Lack of testability",
+        "severity": "Medium",
+        "message": "Acceptance criteria are absent or not yet measurable.",
+        "recommendation": "Add pass/fail criteria, test data, and expected outcome."
+      },
+      {
+        "id": "QI-007",
+        "requirement_id": "REQ-006",
+        "check": "Lack of testability",
+        "severity": "Medium",
+        "message": "Acceptance criteria are absent or not yet measurable.",
+        "recommendation": "Add pass/fail criteria, test data, and expected outcome."
+      },
+      {
+        "id": "QI-008",
+        "requirement_id": "REQ-007",
+        "check": "Ambiguity",
+        "severity": "Medium",
+        "message": "The requirement contains a qualitative term without a measurable threshold.",
+        "recommendation": "Define an observable metric, limit, or acceptance test."
+      },
+      {
+        "id": "QI-009",
+        "requirement_id": "REQ-007",
+        "check": "Lack of testability",
+        "severity": "Medium",
+        "message": "Acceptance criteria are absent or not yet measurable.",
+        "recommendation": "Add pass/fail criteria, test data, and expected outcome."
+      },
+      {
+        "id": "QI-011",
+        "requirement_id": "REQ-008",
+        "check": "Ambiguity",
+        "severity": "Medium",
+        "message": "The requirement contains a qualitative term without a measurable threshold.",
+        "recommendation": "Define an observable metric, limit, or acceptance test."
+      },
+      {
+        "id": "QI-012",
+        "requirement_id": "REQ-008",
+        "check": "Lack of testability",
+        "severity": "Medium",
+        "message": "Acceptance criteria are absent or not yet measurable.",
+        "recommendation": "Add pass/fail criteria, test data, and expected outcome."
+      },
+      {
+        "id": "QI-014",
+        "requirement_id": "REQ-009",
+        "check": "Lack of testability",
+        "severity": "Medium",
+        "message": "Acceptance criteria are absent or not yet measurable.",
+        "recommendation": "Add pass/fail criteria, test data, and expected outcome."
+      },
+      {
+        "id": "QI-016",
+        "requirement_id": "REQ-010",
+        "check": "Lack of testability",
+        "severity": "Medium",
+        "message": "Acceptance criteria are absent or not yet measurable.",
+        "recommendation": "Add pass/fail criteria, test data, and expected outcome."
+      },
+      {
+        "id": "QI-018",
+        "requirement_id": "REQ-001",
+        "check": "Potential conflict",
+        "severity": "High",
+        "message": "Potentially opposing statements detected with REQ-002.",
+        "recommendation": "Ask the accountable stakeholders to resolve the conflict and record the decision."
+      },
+      {
+        "id": "QI-019",
+        "requirement_id": "REQ-001",
+        "check": "Potential conflict",
+        "severity": "High",
+        "message": "Potentially opposing statements detected with REQ-003.",
+        "recommendation": "Ask the accountable stakeholders to resolve the conflict and record the decision."
+      },
+      {
+        "id": "QI-020",
+        "requirement_id": "REQ-001",
+        "check": "Potential conflict",
+        "severity": "High",
+        "message": "Potentially opposing statements detected with REQ-004.",
+        "recommendation": "Ask the accountable stakeholders to resolve the conflict and record the decision."
+      },
+      {
+        "id": "QI-021",
+        "requirement_id": "REQ-001",
+        "check": "Potential conflict",
+        "severity": "High",
+        "message": "Potentially opposing statements detected with REQ-007.",
+        "recommendation": "Ask the accountable stakeholders to resolve the conflict and record the decision."
+      },
+      {
+        "id": "QI-022",
+        "requirement_id": "REQ-001",
+        "check": "Potential conflict",
+        "severity": "High",
+        "message": "Potentially opposing statements detected with REQ-008.",
+        "recommendation": "Ask the accountable stakeholders to resolve the conflict and record the decision."
+      },
+      {
+        "id": "QI-023",
+        "requirement_id": "REQ-001",
+        "check": "Potential conflict",
+        "severity": "High",
+        "message": "Potentially opposing statements detected with REQ-009.",
+        "recommendation": "Ask the accountable stakeholders to resolve the conflict and record the decision."
+      },
+      {
+        "id": "QI-024",
+        "requirement_id": "REQ-005",
+        "check": "Potential conflict",
+        "severity": "High",
+        "message": "Potentially opposing statements detected with REQ-010.",
+        "recommendation": "Ask the accountable stakeholders to resolve the conflict and record the decision."
+      },
+      {
+        "id": "QI-025",
+        "requirement_id": "REQ-006",
+        "check": "Potential conflict",
+        "severity": "High",
+        "message": "Potentially opposing statements detected with REQ-010.",
+        "recommendation": "Ask the accountable stakeholders to resolve the conflict and record the decision."
+      },
+      {
+        "id": "QI-026",
+        "requirement_id": "REQ-007",
+        "check": "Potential conflict",
+        "severity": "High",
+        "message": "Potentially opposing statements detected with REQ-010.",
+        "recommendation": "Ask the accountable stakeholders to resolve the conflict and record the decision."
+      },
+      {
+        "id": "QI-027",
+        "requirement_id": "REQ-008",
+        "check": "Potential conflict",
+        "severity": "High",
+        "message": "Potentially opposing statements detected with REQ-010.",
+        "recommendation": "Ask the accountable stakeholders to resolve the conflict and record the decision."
+      },
+      {
+        "id": "QI-028",
+        "requirement_id": "REQ-009",
+        "check": "Potential conflict",
+        "severity": "High",
+        "message": "Potentially opposing statements detected with REQ-010.",
+        "recommendation": "Ask the accountable stakeholders to resolve the conflict and record the decision."
+      }
+    ],
+    "compliance_control_matrix": [
+      {
+        "requirement_id": "REQ-001",
+        "mappings": [
+          {
+            "control_id": "ECOM-PAYMENT",
+            "source_title": "Payment and checkout security review (advisory practice; not a regulation)",
+            "source_url": "",
+            "jurisdiction": "Project-defined",
+            "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+            "rationale": "Review payment-provider boundaries, checkout integrity, sensitive-data handling, and failure recovery.",
+            "human_approval_required": true
+          },
+          {
+            "control_id": "ECOM-ORDER-AUDIT",
+            "source_title": "Order and administrative auditability (advisory practice; not a regulation)",
+            "source_url": "",
+            "jurisdiction": "Project-defined",
+            "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+            "rationale": "Define traceable order-state changes, privileged actions, and operational evidence.",
+            "human_approval_required": true
+          }
+        ]
+      },
+      {
+        "requirement_id": "REQ-002",
+        "mappings": []
+      },
+      {
+        "requirement_id": "REQ-003",
+        "mappings": [
+          {
+            "control_id": "ECOM-API-RESILIENCE",
+            "source_title": "Marketplace and integration resilience (advisory practice; not a regulation)",
+            "source_url": "",
+            "jurisdiction": "Project-defined",
+            "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+            "rationale": "Review interface ownership, validation, retries, idempotency, and failure handling.",
+            "human_approval_required": true
+          }
+        ]
+      },
+      {
+        "requirement_id": "REQ-004",
+        "mappings": [
+          {
+            "control_id": "ECOM-PAYMENT",
+            "source_title": "Payment and checkout security review (advisory practice; not a regulation)",
+            "source_url": "",
+            "jurisdiction": "Project-defined",
+            "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+            "rationale": "Review payment-provider boundaries, checkout integrity, sensitive-data handling, and failure recovery.",
+            "human_approval_required": true
+          },
+          {
+            "control_id": "ECOM-ORDER-AUDIT",
+            "source_title": "Order and administrative auditability (advisory practice; not a regulation)",
+            "source_url": "",
+            "jurisdiction": "Project-defined",
+            "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+            "rationale": "Define traceable order-state changes, privileged actions, and operational evidence.",
+            "human_approval_required": true
+          }
+        ]
+      },
+      {
+        "requirement_id": "REQ-005",
+        "mappings": [
+          {
+            "control_id": "ECOM-PAYMENT",
+            "source_title": "Payment and checkout security review (advisory practice; not a regulation)",
+            "source_url": "",
+            "jurisdiction": "Project-defined",
+            "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+            "rationale": "Review payment-provider boundaries, checkout integrity, sensitive-data handling, and failure recovery.",
+            "human_approval_required": true
+          }
+        ]
+      },
+      {
+        "requirement_id": "REQ-006",
+        "mappings": [
+          {
+            "control_id": "ECOM-IDENTITY",
+            "source_title": "Customer and staff identity controls (advisory practice; not a regulation)",
+            "source_url": "",
+            "jurisdiction": "Project-defined",
+            "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+            "rationale": "Review authentication, account recovery, session handling, and staff access boundaries.",
+            "human_approval_required": true
+          }
+        ]
+      },
+      {
+        "requirement_id": "REQ-007",
+        "mappings": [
+          {
+            "control_id": "ECOM-PAYMENT",
+            "source_title": "Payment and checkout security review (advisory practice; not a regulation)",
+            "source_url": "",
+            "jurisdiction": "Project-defined",
+            "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+            "rationale": "Review payment-provider boundaries, checkout integrity, sensitive-data handling, and failure recovery.",
+            "human_approval_required": true
+          },
+          {
+            "control_id": "ECOM-PRIVACY",
+            "source_title": "Customer data privacy review (advisory practice; not a regulation)",
+            "source_url": "",
+            "jurisdiction": "Project-defined",
+            "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+            "rationale": "Confirm data purpose, minimisation, access, retention, and deletion against an approved project policy.",
+            "human_approval_required": true
+          }
+        ]
+      },
+      {
+        "requirement_id": "REQ-008",
+        "mappings": [
+          {
+            "control_id": "ECOM-PAYMENT",
+            "source_title": "Payment and checkout security review (advisory practice; not a regulation)",
+            "source_url": "",
+            "jurisdiction": "Project-defined",
+            "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+            "rationale": "Review payment-provider boundaries, checkout integrity, sensitive-data handling, and failure recovery.",
+            "human_approval_required": true
+          },
+          {
+            "control_id": "ECOM-ORDER-AUDIT",
+            "source_title": "Order and administrative auditability (advisory practice; not a regulation)",
+            "source_url": "",
+            "jurisdiction": "Project-defined",
+            "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+            "rationale": "Define traceable order-state changes, privileged actions, and operational evidence.",
+            "human_approval_required": true
+          }
+        ]
+      },
+      {
+        "requirement_id": "REQ-009",
+        "mappings": []
+      },
+      {
+        "requirement_id": "REQ-010",
+        "mappings": [
+          {
+            "control_id": "ECOM-ORDER-AUDIT",
+            "source_title": "Order and administrative auditability (advisory practice; not a regulation)",
+            "source_url": "",
+            "jurisdiction": "Project-defined",
+            "applicability": "Review with the project security/privacy owner; no legal applicability is asserted.",
+            "rationale": "Define traceable order-state changes, privileged actions, and operational evidence.",
+            "human_approval_required": true
+          }
+        ]
+      }
+    ],
+    "clarification_queue": [
+      "REQ-003: Has the security, privacy, and compliance applicability for this requirement been confirmed?",
+      "REQ-004: Has the security, privacy, and compliance applicability for this requirement been confirmed?",
+      "REQ-006: What pass/fail acceptance test, test data, and expected result will verify this requirement?",
+      "REQ-007: What measurable threshold or observable outcome should replace the qualitative wording?",
+      "REQ-007: What pass/fail acceptance test, test data, and expected result will verify this requirement?",
+      "REQ-007: Has the security, privacy, and compliance applicability for this requirement been confirmed?",
+      "REQ-008: What measurable threshold or observable outcome should replace the qualitative wording?",
+      "REQ-008: What pass/fail acceptance test, test data, and expected result will verify this requirement?",
+      "REQ-008: Has the security, privacy, and compliance applicability for this requirement been confirmed?",
+      "REQ-009: What pass/fail acceptance test, test data, and expected result will verify this requirement?",
+      "REQ-009: Has the security, privacy, and compliance applicability for this requirement been confirmed?",
+      "REQ-010: What pass/fail acceptance test, test data, and expected result will verify this requirement?",
+      "REQ-010: Has the security, privacy, and compliance applicability for this requirement been confirmed?",
+      "REQ-001: Which accountable stakeholder should resolve the conflicting expectations, and what is the decision?",
+      "REQ-005: Which accountable stakeholder should resolve the conflicting expectations, and what is the decision?",
+      "REQ-006: Which accountable stakeholder should resolve the conflicting expectations, and what is the decision?",
+      "REQ-007: Which accountable stakeholder should resolve the conflicting expectations, and what is the decision?",
+      "REQ-008: Which accountable stakeholder should resolve the conflicting expectations, and what is the decision?",
+      "REQ-009: Which accountable stakeholder should resolve the conflicting expectations, and what is the decision?"
+    ],
+    "approval_register": [
+      {
+        "id": "APR-A43E4646",
+        "subject_type": "SDLC",
+        "subject_id": "Spiral",
+        "decision": "Approved",
+        "reviewer": "local-admin",
+        "reviewer_role": "admin",
+        "rationale": "SDLC decision recorded in the prototype interface.",
+        "at": "2026-10-30T17:12:11.337310Z"
+      },
+      {
+        "id": "APR-FCD28CFC",
+        "subject_type": "SDLC",
+        "subject_id": "Spiral",
+        "decision": "Approved",
+        "reviewer": "local-admin",
+        "reviewer_role": "admin",
+        "rationale": "SDLC decision recorded in the prototype interface.",
+        "at": "2026-10-30T17:12:18.909726Z"
+      }
+    ],
+    "evaluation": {
+      "requirements_count": 10,
+      "citation_coverage": 1.0,
+      "measurable_acceptance_coverage": 0.3,
+      "control_review_coverage": 0.8,
+      "open_high_issues": 11,
+      "open_risks": 5,
+      "human_review_coverage": 0.0,
+      "notes": [
+        "Resolve high-severity quality issues before approval.",
+        "Human review is incomplete."
+      ]
+    },
+    "sdlc_workflow": {
+      "recommended_sdlc": "Spiral",
+      "factors": [
+        {
+          "name": "Requirement stability",
+          "value": "Needs validation",
+          "score": 2,
+          "rationale": "Draft or unapproved requirements indicate that stability has not yet been demonstrated.",
+          "requirement_ids": [
+            "REQ-001",
+            "REQ-002",
+            "REQ-003",
+            "REQ-004",
+            "REQ-005",
+            "REQ-006",
+            "REQ-007",
+            "REQ-008",
+            "REQ-009",
+            "REQ-010"
+          ]
+        },
+        {
+          "name": "Requirement clarity",
+          "value": "Moderate",
+          "score": 3,
+          "rationale": "Measured from the presence of concrete, non-placeholder acceptance criteria.",
+          "requirement_ids": [
+            "REQ-004",
+            "REQ-005",
+            "REQ-006",
+            "REQ-007",
+            "REQ-008",
+            "REQ-009",
+            "REQ-010"
+          ]
+        },
+        {
+          "name": "Risk",
+          "value": "High",
+          "score": 5,
+          "rationale": "Derived from stated high risk and security, privacy, regulatory, or audit classifications.",
+          "requirement_ids": [
+            "REQ-002",
+            "REQ-005",
+            "REQ-006"
+          ]
+        },
+        {
+          "name": "Complexity",
+          "value": "High",
+          "score": 4,
+          "rationale": "Integration and data-management requirements increase coordination and technical complexity.",
+          "requirement_ids": [
+            "REQ-003",
+            "REQ-005",
+            "REQ-007",
+            "REQ-008"
+          ]
+        },
+        {
+          "name": "Need for early prototype",
+          "value": "Likely",
+          "score": 4,
+          "rationale": "Unclear requirements or integration complexity make early learning and validation valuable.",
+          "requirement_ids": []
+        },
+        {
+          "name": "Time constraints",
+          "value": "Not evidenced",
+          "score": 3,
+          "rationale": "No schedule or deadline evidence is available in the generated requirements; confirm this with the project sponsor.",
+          "requirement_ids": []
+        },
+        {
+          "name": "Customer involvement",
+          "value": "Not evidenced",
+          "score": 3,
+          "rationale": "Derived only from business, stakeholder, or usability requirements; otherwise this must be confirmed.",
+          "requirement_ids": []
+        },
+        {
+          "name": "Frequency of changes",
+          "value": "Not evidenced",
+          "score": 3,
+          "rationale": "Requirement documents do not establish the expected change rate; confirm with product and business stakeholders.",
+          "requirement_ids": []
+        },
+        {
+          "name": "Need for iterative development",
+          "value": "Likely",
+          "score": 4,
+          "rationale": "Unapproved or unclear requirements benefit from repeated review and validation cycles.",
+          "requirement_ids": []
+        },
+        {
+          "name": "Need for risk analysis",
+          "value": "High",
+          "score": 5,
+          "rationale": "Security/compliance concerns or complex integration warrant explicit risk analysis.",
+          "requirement_ids": [
+            "REQ-002",
+            "REQ-003",
+            "REQ-005",
+            "REQ-006",
+            "REQ-007",
+            "REQ-008"
+          ]
+        }
+      ],
+      "options": [
+        {
+          "name": "Spiral",
+          "score": 95,
+          "suitability": "Best when risk analysis, prototypes, and repeated risk-reduction cycles are central."
+        },
+        {
+          "name": "DevSecOps",
+          "score": 92,
+          "suitability": "Best where iterative delivery is paired with automated security, assurance, and operational controls."
+        },
+        {
+          "name": "V-Shape",
+          "score": 88,
+          "suitability": "Best when each specification stage needs a linked verification and validation activity."
+        },
+        {
+          "name": "Incremental",
+          "score": 86,
+          "suitability": "Best when value can be divided into validated, independently testable increments."
+        },
+        {
+          "name": "Agileâ€“V-Model hybrid",
+          "score": 86,
+          "suitability": "Best where evolving delivery needs formal verification and validation gates for regulated scope."
+        },
+        {
+          "name": "Agile",
+          "score": 82,
+          "suitability": "Best for frequent feedback and evolving requirements, with planned governance for high-risk work."
+        },
+        {
+          "name": "Prototyping",
+          "score": 79,
+          "suitability": "Best for validating uncertain user needs, workflows, and interfaces before committing to a full build."
+        },
+        {
+          "name": "Waterfall",
+          "score": 47,
+          "suitability": "Best when requirements are stable, fully specified, and changes are controlled."
+        },
+        {
+          "name": "RAD",
+          "score": 37,
+          "suitability": "Best for time-boxed delivery with available users and modular, lower-risk scope."
+        }
+      ],
+      "justification": "Spiral has the highest transparent score because requirement stability is needs validation, requirement clarity is moderate, risk is high, complexity is high, need for early prototype is likely. Factors marked 'Not evidenced' are deliberately neutral and require stakeholder confirmation before the SDLC is approved.",
+      "workflow": [
+        {
+          "phase": "Validate requirements",
+          "activities": [
+            "Resolve quality issues",
+            "Confirm stability, time constraints, and expected changes",
+            "Prioritise requirement baseline"
+          ],
+          "roles": [
+            "Business analyst",
+            "Customer representative"
+          ],
+          "deliverables": [
+            "Validated requirements",
+            "SDLC factor assessment"
+          ],
+          "gate": "Stakeholder confirms project assumptions"
+        },
+        {
+          "phase": "Plan the model",
+          "activities": [
+            "Review ranked SDLC options",
+            "Plan risk analysis",
+            "Define iteration or stage gates"
+          ],
+          "roles": [
+            "Project manager",
+            "Architect",
+            "Risk owner"
+          ],
+          "deliverables": [
+            "Approved SDLC decision",
+            "Risk register"
+          ],
+          "gate": "Engineering and business approval"
+        },
+        {
+          "phase": "Develop and validate",
+          "activities": [
+            "Build planned scope",
+            "Test against acceptance criteria",
+            "Review feedback and risks"
+          ],
+          "roles": [
+            "Developers",
+            "QA",
+            "Customer representative"
+          ],
+          "deliverables": [
+            "Working increment or verified stage",
+            "Test evidence"
+          ],
+          "gate": "Quality and stakeholder acceptance"
+        },
+        {
+          "phase": "Release and learn",
+          "activities": [
+            "Release approved scope",
+            "Monitor outcomes",
+            "Reassess requirement changes and risks"
+          ],
+          "roles": [
+            "Operations",
+            "Product owner",
+            "Project manager"
+          ],
+          "deliverables": [
+            "Release record",
+            "Updated SDLC assessment"
+          ],
+          "gate": "Release and change-control approval"
+        }
+      ],
+      "human_approval_required": true
+    },
+    "agent_runs": [
+      {
+        "agent": "Requirements Agent",
+        "responsibility": "Requirement extraction, classification, traceability, and quality review",
+        "status": "Waiting for human review",
+        "output": "Generated 10 evidence-only RAG-grounded draft requirement(s) and found 28 quality issue(s).",
+        "at": "2026-10-30T16:08:21.903939Z"
+      },
+      {
+        "agent": "Compliance & Risk Agent",
+        "responsibility": "E-commerce security/privacy review prompts, risk register, and traceability",
+        "status": "Waiting for human review",
+        "output": "Raised 12 advisory control review prompt(s) and 5 reviewable risk entries.",
+        "at": "2026-10-30T16:08:21.904826Z"
+      },
+      {
+        "agent": "Documentation Agent",
+        "responsibility": "SRS, user-story, use-case, traceability, risk, and open-issue artefacts",
+        "status": "Waiting for human review",
+        "output": "Generated exportable SRS, user-story, use-case, risk, compliance, traceability, and open-issue artefacts.",
+        "at": "2026-10-30T16:08:21.905967Z"
+      },
+      {
+        "agent": "Requirements Agent",
+        "responsibility": "Requirement extraction, classification, traceability, and quality review",
+        "status": "Waiting for human review",
+        "output": "Generated 10 evidence-only RAG-grounded draft requirement(s) and found 28 quality issue(s).",
+        "at": "2026-10-30T16:08:26.431604Z"
+      },
+      {
+        "agent": "Compliance & Risk Agent",
+        "responsibility": "E-commerce security/privacy review prompts, risk register, and traceability",
+        "status": "Waiting for human review",
+        "output": "Raised 12 advisory control review prompt(s) and 5 reviewable risk entries.",
+        "at": "2026-10-30T16:08:26.432378Z"
+      },
+      {
+        "agent": "Documentation Agent",
+        "responsibility": "SRS, user-story, use-case, traceability, risk, and open-issue artefacts",
+        "status": "Waiting for human review",
+        "output": "Generated exportable SRS, user-story, use-case, risk, compliance, traceability, and open-issue artefacts.",
+        "at": "2026-10-30T16:08:26.433719Z"
+      },
+      {
+        "agent": "Governance & SDLC Agent",
+        "responsibility": "Risk and control assessment, SDLC ranking, and approval-gate planning",
+        "status": "Waiting for human review",
+        "output": "Recommended Spiral; human approval remains required.",
+        "at": "2026-10-30T16:53:04.539962Z"
+      }
+    ]
+  },
+  "clarification_questions": [
+    "REQ-003: Has the security, privacy, and compliance applicability for this requirement been confirmed?",
+    "REQ-004: Has the security, privacy, and compliance applicability for this requirement been confirmed?",
+    "REQ-006: What pass/fail acceptance test, test data, and expected result will verify this requirement?",
+    "REQ-007: What measurable threshold or observable outcome should replace the qualitative wording?",
+    "REQ-007: What pass/fail acceptance test, test data, and expected result will verify this requirement?",
+    "REQ-007: Has the security, privacy, and compliance applicability for this requirement been confirmed?",
+    "REQ-008: What measurable threshold or observable outcome should replace the qualitative wording?",
+    "REQ-008: What pass/fail acceptance test, test data, and expected result will verify this requirement?",
+    "REQ-008: Has the security, privacy, and compliance applicability for this requirement been confirmed?",
+    "REQ-009: What pass/fail acceptance test, test data, and expected result will verify this requirement?",
+    "REQ-009: Has the security, privacy, and compliance applicability for this requirement been confirmed?",
+    "REQ-010: What pass/fail acceptance test, test data, and expected result will verify this requirement?",
+    "REQ-010: Has the security, privacy, and compliance applicability for this requirement been confirmed?",
+    "REQ-001: Which accountable stakeholder should resolve the conflicting expectations, and what is the decision?",
+    "REQ-005: Which accountable stakeholder should resolve the conflicting expectations, and what is the decision?",
+    "REQ-006: Which accountable stakeholder should resolve the conflicting expectations, and what is the decision?",
+    "REQ-007: Which accountable stakeholder should resolve the conflicting expectations, and what is the decision?",
+    "REQ-008: Which accountable stakeholder should resolve the conflicting expectations, and what is the decision?",
+    "REQ-009: Which accountable stakeholder should resolve the conflicting expectations, and what is the decision?"
+  ],
+  "clarification_responses": [
+    {
+      "question": "REQ-001: Has the security, privacy, and compliance applicability for this requirement been confirmed?",
+      "response": "\"Yes. The requirement involves customer information, orders, and payments. Authentication, secure payment processing, and protection of customer data are applicable.\"",
+      "requirement_id": "REQ-001",
+      "at": "2026-10-30T16:48:24.847869+00:00"
+    },
+    {
+      "question": "REQ-001: Has the security, privacy, and compliance applicability for this requirement been confirmed?",
+      "response": "\"Yes. The requirement involves customer information, orders, and payments. Authentication, secure payment processing, and protection of customer data are applicable.\"",
+      "requirement_id": "REQ-001",
+      "at": "2026-10-30T16:48:24.943783+00:00"
+    },
+    {
+      "question": "REQ-003: What measurable threshold or observable outcome should replace the qualitative wording?",
+      "response": "\"Customers should be able to browse products and add items to their cart within three navigation steps. Administrators should be able to manage products, and delivery personnel should be able to update delivery status.\"",
+      "requirement_id": "REQ-003",
+      "at": "2026-10-30T16:49:15.688414+00:00"
+    },
+    {
+      "question": "REQ-004: What pass/fail acceptance test, test data, and expected result will verify this requirement?",
+      "response": "\"The system should allow customers to browse products, add products to their cart, complete payments, and track orders. Testing should verify that each operation completes successfully.\"",
+      "requirement_id": "REQ-004",
+      "at": "2026-10-30T16:49:41.375466+00:00"
+    },
+    {
+      "question": "REQ-005: What pass/fail acceptance test, test data, and expected result will verify this requirement?",
+      "response": "\"Verify that customer information is protected, passwords are securely stored, and payment transactions are processed through a secure payment mechanism.\"",
+      "requirement_id": "REQ-005",
+      "at": "2026-10-30T16:50:33.039884+00:00"
+    }
+  ],
+  "approvals": [
+    {
+      "id": "APR-A43E4646",
+      "subject_type": "SDLC",
+      "subject_id": "Spiral",
+      "decision": "Approved",
+      "reviewer": "local-admin",
+      "reviewer_role": "admin",
+      "rationale": "SDLC decision recorded in the prototype interface.",
+      "at": "2026-10-30T17:12:11.337310Z"
+    },
+    {
+      "id": "APR-FCD28CFC",
+      "subject_type": "SDLC",
+      "subject_id": "Spiral",
+      "decision": "Approved",
+      "reviewer": "local-admin",
+      "reviewer_role": "admin",
+      "rationale": "SDLC decision recorded in the prototype interface.",
+      "at": "2026-10-30T17:12:18.909726Z"
+    }
+  ],
+  "evaluation": {
+    "requirements_count": 10,
+    "citation_coverage": 1.0,
+    "measurable_acceptance_coverage": 0.3,
+    "control_review_coverage": 0.8,
+    "open_high_issues": 11,
+    "open_risks": 5,
+    "human_review_coverage": 0.0,
+    "notes": [
+      "Resolve high-severity quality issues before approval.",
+      "Human review is incomplete."
+    ]
+  },
+  "sdlc": {
+    "recommended_sdlc": "Spiral",
+    "factors": [
+      {
+        "name": "Requirement stability",
+        "value": "Needs validation",
+        "score": 2,
+        "rationale": "Draft or unapproved requirements indicate that stability has not yet been demonstrated.",
+        "requirement_ids": [
+          "REQ-001",
+          "REQ-002",
+          "REQ-003",
+          "REQ-004",
+          "REQ-005",
+          "REQ-006",
+          "REQ-007",
+          "REQ-008",
+          "REQ-009",
+          "REQ-010"
+        ]
+      },
+      {
+        "name": "Requirement clarity",
+        "value": "Moderate",
+        "score": 3,
+        "rationale": "Measured from the presence of concrete, non-placeholder acceptance criteria.",
+        "requirement_ids": [
+          "REQ-004",
+          "REQ-005",
+          "REQ-006",
+          "REQ-007",
+          "REQ-008",
+          "REQ-009",
+          "REQ-010"
+        ]
+      },
+      {
+        "name": "Risk",
+        "value": "High",
+        "score": 5,
+        "rationale": "Derived from stated high risk and security, privacy, regulatory, or audit classifications.",
+        "requirement_ids": [
+          "REQ-002",
+          "REQ-005",
+          "REQ-006"
+        ]
+      },
+      {
+        "name": "Complexity",
+        "value": "High",
+        "score": 4,
+        "rationale": "Integration and data-management requirements increase coordination and technical complexity.",
+        "requirement_ids": [
+          "REQ-003",
+          "REQ-005",
+          "REQ-007",
+          "REQ-008"
+        ]
+      },
+      {
+        "name": "Need for early prototype",
+        "value": "Likely",
+        "score": 4,
+        "rationale": "Unclear requirements or integration complexity make early learning and validation valuable.",
+        "requirement_ids": []
+      },
+      {
+        "name": "Time constraints",
+        "value": "Not evidenced",
+        "score": 3,
+        "rationale": "No schedule or deadline evidence is available in the generated requirements; confirm this with the project sponsor.",
+        "requirement_ids": []
+      },
+      {
+        "name": "Customer involvement",
+        "value": "Not evidenced",
+        "score": 3,
+        "rationale": "Derived only from business, stakeholder, or usability requirements; otherwise this must be confirmed.",
+        "requirement_ids": []
+      },
+      {
+        "name": "Frequency of changes",
+        "value": "Not evidenced",
+        "score": 3,
+        "rationale": "Requirement documents do not establish the expected change rate; confirm with product and business stakeholders.",
+        "requirement_ids": []
+      },
+      {
+        "name": "Need for iterative development",
+        "value": "Likely",
+        "score": 4,
+        "rationale": "Unapproved or unclear requirements benefit from repeated review and validation cycles.",
+        "requirement_ids": []
+      },
+      {
+        "name": "Need for risk analysis",
+        "value": "High",
+        "score": 5,
+        "rationale": "Security/compliance concerns or complex integration warrant explicit risk analysis.",
+        "requirement_ids": [
+          "REQ-002",
+          "REQ-003",
+          "REQ-005",
+          "REQ-006",
+          "REQ-007",
+          "REQ-008"
+        ]
+      }
+    ],
+    "options": [
+      {
+        "name": "Spiral",
+        "score": 95,
+        "suitability": "Best when risk analysis, prototypes, and repeated risk-reduction cycles are central."
+      },
+      {
+        "name": "DevSecOps",
+        "score": 92,
+        "suitability": "Best where iterative delivery is paired with automated security, assurance, and operational controls."
+      },
+      {
+        "name": "V-Shape",
+        "score": 88,
+        "suitability": "Best when each specification stage needs a linked verification and validation activity."
+      },
+      {
+        "name": "Incremental",
+        "score": 86,
+        "suitability": "Best when value can be divided into validated, independently testable increments."
+      },
+      {
+        "name": "Agileâ€“V-Model hybrid",
+        "score": 86,
+        "suitability": "Best where evolving delivery needs formal verification and validation gates for regulated scope."
+      },
+      {
+        "name": "Agile",
+        "score": 82,
+        "suitability": "Best for frequent feedback and evolving requirements, with planned governance for high-risk work."
+      },
+      {
+        "name": "Prototyping",
+        "score": 79,
+        "suitability": "Best for validating uncertain user needs, workflows, and interfaces before committing to a full build."
+      },
+      {
+        "name": "Waterfall",
+        "score": 47,
+        "suitability": "Best when requirements are stable, fully specified, and changes are controlled."
+      },
+      {
+        "name": "RAD",
+        "score": 37,
+        "suitability": "Best for time-boxed delivery with available users and modular, lower-risk scope."
+      }
+    ],
+    "justification": "Spiral has the highest transparent score because requirement stability is needs validation, requirement clarity is moderate, risk is high, complexity is high, need for early prototype is likely. Factors marked 'Not evidenced' are deliberately neutral and require stakeholder confirmation before the SDLC is approved.",
+    "workflow": [
+      {
+        "phase": "Validate requirements",
+        "activities": [
+          "Resolve quality issues",
+          "Confirm stability, time constraints, and expected changes",
+          "Prioritise requirement baseline"
+        ],
+        "roles": [
+          "Business analyst",
+          "Customer representative"
+        ],
+        "deliverables": [
+          "Validated requirements",
+          "SDLC factor assessment"
+        ],
+        "gate": "Stakeholder confirms project assumptions"
+      },
+      {
+        "phase": "Plan the model",
+        "activities": [
+          "Review ranked SDLC options",
+          "Plan risk analysis",
+          "Define iteration or stage gates"
+        ],
+        "roles": [
+          "Project manager",
+          "Architect",
+          "Risk owner"
+        ],
+        "deliverables": [
+          "Approved SDLC decision",
+          "Risk register"
+        ],
+        "gate": "Engineering and business approval"
+      },
+      {
+        "phase": "Develop and validate",
+        "activities": [
+          "Build planned scope",
+          "Test against acceptance criteria",
+          "Review feedback and risks"
+        ],
+        "roles": [
+          "Developers",
+          "QA",
+          "Customer representative"
+        ],
+        "deliverables": [
+          "Working increment or verified stage",
+          "Test evidence"
+        ],
+        "gate": "Quality and stakeholder acceptance"
+      },
+      {
+        "phase": "Release and learn",
+        "activities": [
+          "Release approved scope",
+          "Monitor outcomes",
+          "Reassess requirement changes and risks"
+        ],
+        "roles": [
+          "Operations",
+          "Product owner",
+          "Project manager"
+        ],
+        "deliverables": [
+          "Release record",
+          "Updated SDLC assessment"
+        ],
+        "gate": "Release and change-control approval"
+      }
+    ],
+    "human_approval_required": true
+  },
+  "agent_runs": [
+    {
+      "agent": "Requirements Agent",
+      "responsibility": "Requirement extraction, classification, traceability, and quality review",
+      "status": "Waiting for human review",
+      "output": "Generated 10 evidence-only RAG-grounded draft requirement(s) and found 28 quality issue(s).",
+      "at": "2026-10-30T16:08:21.903939Z"
+    },
+    {
+      "agent": "Compliance & Risk Agent",
+      "responsibility": "E-commerce security/privacy review prompts, risk register, and traceability",
+      "status": "Waiting for human review",
+      "output": "Raised 12 advisory control review prompt(s) and 5 reviewable risk entries.",
+      "at": "2026-10-30T16:08:21.904826Z"
+    },
+    {
+      "agent": "Documentation Agent",
+      "responsibility": "SRS, user-story, use-case, traceability, risk, and open-issue artefacts",
+      "status": "Waiting for human review",
+      "output": "Generated exportable SRS, user-story, use-case, risk, compliance, traceability, and open-issue artefacts.",
+      "at": "2026-10-30T16:08:21.905967Z"
+    },
+    {
+      "agent": "Requirements Agent",
+      "responsibility": "Requirement extraction, classification, traceability, and quality review",
+      "status": "Waiting for human review",
+      "output": "Generated 10 evidence-only RAG-grounded draft requirement(s) and found 28 quality issue(s).",
+      "at": "2026-10-30T16:08:26.431604Z"
+    },
+    {
+      "agent": "Compliance & Risk Agent",
+      "responsibility": "E-commerce security/privacy review prompts, risk register, and traceability",
+      "status": "Waiting for human review",
+      "output": "Raised 12 advisory control review prompt(s) and 5 reviewable risk entries.",
+      "at": "2026-10-30T16:08:26.432378Z"
+    },
+    {
+      "agent": "Documentation Agent",
+      "responsibility": "SRS, user-story, use-case, traceability, risk, and open-issue artefacts",
+      "status": "Waiting for human review",
+      "output": "Generated exportable SRS, user-story, use-case, risk, compliance, traceability, and open-issue artefacts.",
+      "at": "2026-10-30T16:08:26.433719Z"
+    },
+    {
+      "agent": "Governance & SDLC Agent",
+      "responsibility": "Risk and control assessment, SDLC ranking, and approval-gate planning",
+      "status": "Waiting for human review",
+      "output": "Recommended Spiral; human approval remains required.",
+      "at": "2026-10-30T16:53:04.539962Z"
+    }
+  ],
+  "audit_log": [
+    {
+      "at": "2026-10-30T16:07:51.886355+00:00",
+      "action": "sources_recorded",
+      "detail": "Indexed 0 approved reference source(s), plus 10 masked stakeholder response(s) and 0 uploaded document(s)."
+    },
+    {
+      "at": "2026-10-30T16:07:51.886411+00:00",
+      "action": "rag_indexed",
+      "detail": "Indexed 6 source chunk(s) in ChromaDB."
+    },
+    {
+      "at": "2026-10-30T16:08:21.903971+00:00",
+      "action": "agent_completed",
+      "detail": "Requirements Agent: Generated 10 evidence-only RAG-grounded draft requirement(s) and found 28 quality issue(s)."
+    },
+    {
+      "at": "2026-10-30T16:08:21.904841+00:00",
+      "action": "agent_completed",
+      "detail": "Compliance & Risk Agent: Raised 12 advisory control review prompt(s) and 5 reviewable risk entries."
+    },
+    {
+      "at": "2026-10-30T16:08:21.905987+00:00",
+      "action": "agent_completed",
+      "detail": "Documentation Agent: Generated exportable SRS, user-story, use-case, risk, compliance, traceability, and open-issue artefacts."
+    },
+    {
+      "at": "2026-10-30T16:08:26.431643+00:00",
+      "action": "agent_completed",
+      "detail": "Requirements Agent: Generated 10 evidence-only RAG-grounded draft requirement(s) and found 28 quality issue(s)."
+    },
+    {
+      "at": "2026-10-30T16:08:26.432391+00:00",
+      "action": "agent_completed",
+      "detail": "Compliance & Risk Agent: Raised 12 advisory control review prompt(s) and 5 reviewable risk entries."
+    },
+    {
+      "at": "2026-10-30T16:08:26.433735+00:00",
+      "action": "agent_completed",
+      "detail": "Documentation Agent: Generated exportable SRS, user-story, use-case, risk, compliance, traceability, and open-issue artefacts."
+    },
+    {
+      "at": "2026-10-30T16:35:57.110119+00:00",
+      "action": "requirement_edited",
+      "detail": "REQ-001 edited by local-admin (admin)."
+    },
+    {
+      "at": "2026-10-30T16:40:37.786357+00:00",
+      "action": "requirement_edited",
+      "detail": "REQ-002 edited by local-admin (admin)."
+    },
+    {
+      "at": "2026-10-30T16:40:37.826947+00:00",
+      "action": "requirement_edited",
+      "detail": "REQ-002 edited by local-admin (admin)."
+    },
+    {
+      "at": "2026-10-30T16:42:12.845839+00:00",
+      "action": "requirement_edited",
+      "detail": "REQ-003 edited by local-admin (admin)."
+    },
+    {
+      "at": "2026-10-30T16:42:12.893636+00:00",
+      "action": "requirement_edited",
+      "detail": "REQ-003 edited by local-admin (admin)."
+    },
+    {
+      "at": "2026-10-30T16:48:24.914463+00:00",
+      "action": "clarification_answered",
+      "detail": "Clarification saved for REQ-001 by local-admin."
+    },
+    {
+      "at": "2026-10-30T16:48:24.973363+00:00",
+      "action": "clarification_answered",
+      "detail": "Clarification saved for REQ-001 by local-admin."
+    },
+    {
+      "at": "2026-10-30T16:49:15.745841+00:00",
+      "action": "clarification_answered",
+      "detail": "Clarification saved for REQ-003 by local-admin."
+    },
+    {
+      "at": "2026-10-30T16:49:41.441412+00:00",
+      "action": "clarification_answered",
+      "detail": "Clarification saved for REQ-004 by local-admin."
+    },
+    {
+      "at": "2026-10-30T16:50:33.107811+00:00",
+      "action": "clarification_answered",
+      "detail": "Clarification saved for REQ-005 by local-admin."
+    },
+    {
+      "at": "2026-10-30T16:53:04.540001+00:00",
+      "action": "agent_completed",
+      "detail": "Governance & SDLC Agent: Recommended Spiral; human approval remains required."
+    },
+    {
+      "at": "2026-10-30T17:12:11.337687+00:00",
+      "action": "sdlc_approval_updated",
+      "detail": "Spiral marked Approved."
+    },
+    {
+      "at": "2026-10-30T17:12:18.910386+00:00",
+      "action": "sdlc_approval_updated",
+      "detail": "Spiral marked Approved."
+    }
+  ]
+}
