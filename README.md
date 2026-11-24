@@ -48,7 +48,7 @@ uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
 
 Open <http://127.0.0.1:8000>. API docs: <http://127.0.0.1:8000/docs>.
 
-## Optional LLM configuration
+## LLM configuration
 
 The app runs without an API key using local embeddings and evidence-only drafts. Add a root `.env` file to enable an OpenAI-compatible provider:
 
