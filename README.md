@@ -112,4 +112,4 @@ Tests cover evidence-to-requirement generation, quality checks, SDLC ranking, ri
 
 ## Sample input
 
-Use [sample_data/ecommerce_checkout_policy.txt](sample_data/ecommerce_checkout_policy.txt) for a short checkout, order, and customer-data example. The sample is illustrative project input, not legal advice or a claim of regulatory applicability.
+Use [ sample_data/ecommerce_checkout_policy.txt ](SE_Nikhil/sample_data/ecommerce_checkout_policy.txt) for a short checkout, order, and customer-data example. The sample is illustrative project input, not legal advice or a claim of regulatory applicability.
